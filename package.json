@@ -1,0 +1,24 @@
+{
+  "name": "dekina-inc.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-docs": "redocly build-docs api-docs/openapi-public.yaml -o public/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dekina-inc/dekina-inc.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dekina-inc/dekina-inc.github.io/issues"
+  },
+  "homepage": "https://github.com/dekina-inc/dekina-inc.github.io#readme",
+  "devDependencies": {
+    "@redocly/cli": "^2.0.8"
+  }
+}
