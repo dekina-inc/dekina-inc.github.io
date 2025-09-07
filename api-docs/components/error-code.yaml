@@ -1,0 +1,29 @@
+# components:
+#   schemas:
+#     ErrorCode:
+#       type: integer
+#       description: |
+#         비즈니스 에러 코드 목록:
+
+#         | 코드  | 설명                |
+#         |-------|-------------------|
+#         | 1001  | id 값을 입력해 주세요 |
+#         | 1002  | 권한이 없습니다       |
+#         | 2001  | 토큰 만료            |
+#         | 3001  | 서버 내부 오류        |
+#       enum: [1001, 1002, 2001, 3001]
+
+
+components:
+  schemas:
+    ErrorCode:
+      type: integer
+      description: 비즈니스 에러 코드
+      enum: [1001, 1002, 2001, 3001]
+      x-enum-descriptions:
+        - "1001: id 값을 입력해 주세요"
+        - "1002: 권한이 없습니다"
+        - "2001: 토큰 만료"
+        - "3001: 서버 내부 오류"
+
+        

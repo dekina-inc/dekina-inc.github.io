@@ -1,0 +1,29 @@
+paths:
+  /v1/money/refund:
+    post:
+      summary: 환불
+      description: |
+      
+        카드결제가 수행된 특정 거래 내역에 대한 카드결제 취소를 수행하는 API 입니다.
+       
+        이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)
+          - `400` : 유효성 검증 실패
+          - `401` : 인증 실패
+          - `403` : 인가되지 않은 권한
+          - `3001` : 거래내역의 결제정보 조회 실패
+          - `3003` : 거래내역의 결제정보 조회 실패
+      
+        해당 API의 경우 데키나 페이지에서 계정 로그인 시 거래내역을 확인하며 환불 진행 또한 가능합니다.
+      operationId: cardRefund    
+      security: []    
+      requestBody:
+        $ref: '../../components/request-bodies/card-refund.yaml#/components/requestBodies/ReqeustBody'
+      responses:
+        '200':
+          description: 요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 `code`, `msg` 필드로 구분합니다.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '../../components/response-bodies/success-empty-response.yaml#/components/schemas/ResponseBody'
+                  - $ref: '../../components/response-bodies/error-response.yaml#/components/schemas/ErrorResponseBody'

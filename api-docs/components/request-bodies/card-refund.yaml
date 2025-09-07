@@ -1,0 +1,26 @@
+components:
+  requestBodies:
+    ReqeustBody:
+      description: 카드결제 취소 요청 본문
+      content:
+        application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - client
+                - secret
+              properties:
+                id:
+                  type: string
+                  description: 거래내역 고유 식별 아이디
+                client:
+                  type: string
+                  description: 공개 API 키
+                secret:
+                  type: string
+                  description: 비밀 API 키
+              example:
+                id: 68b62e7af3775a1369b4ee09
+                client: BXTU9YhZ9vgwZNOm90gpeiJFdb10wx
+                secret: izcfjjaxoyZWoUB3KVD2SafeEax8ob

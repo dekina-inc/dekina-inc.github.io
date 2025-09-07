@@ -1,0 +1,23 @@
+components:
+  schemas:
+    ResponseBody:
+      title: ResponseBody
+      type: object
+      required:
+        - account
+        - client
+        - secret
+      properties:
+        account:
+          type: string
+          description: 사용자 계정 고유 식별 아이디
+        client:
+          type: string
+          description: 공개 API 키
+        string:
+          type: string
+          description: 비밀 API 키
+      example:
+        account: 68adc2406e2bcf248e4ece89
+        client: BXTU9YhZ9vgwZNOm90gpeiJFdb10wx
+        secret: izcfjjaxoyZWoUB3KVD2SafeEax8ob

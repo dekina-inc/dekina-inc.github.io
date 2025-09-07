@@ -1,0 +1,35 @@
+paths:
+  /v1/pay/card/manual:
+    post:
+      summary: 결제
+      description: |
+        카드 결제를 수행하는 API 입니다.
+
+        API 키 or 세션 둘 중 하나는 필수로 유효하여야 결제가 올바르게 수행됩니다.
+        
+        저장 결제는 `save`필드의 값을 `true`로 값을 담아 발송하면 카드 정보가 서버 측에 저장돼 추후 결제 시 `cardNumber`, `cardValidationYear`, `cardValidationMonth` 필드를 사용하지 않고 `cardId(cardToken)` 필드만을 사용해 결제가 가능합니다.
+
+        이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)
+        - `400` : 유효성 검증 실패
+        - `401` : 인증 실패
+        - `500` : 서버 오류
+        - `1009` : 유효하지 않은 API 키
+        - `2001` : 카드결제 실패
+        - `2002` : 결제관련 서버 내부 오류
+        - `2003` : 유효하지 않은 카드 정보
+        - `3001` : 거래내역의 결제정보 조회 실패
+
+      operationId: cardManualPay
+      security: []  
+      requestBody:
+        $ref: '../../components/request-bodies/card-manual.yaml#/components/requestBodies/ReqeustBody'
+      responses:
+        '200':
+          description: 요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 `code`, `msg` 필드로 구분합니다.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '../../components/response-bodies/card-manual.yaml#/components/schemas/ResponseBody'
+                  - $ref: '../../components/response-bodies/error-response.yaml#/components/schemas/ErrorResponseBody'
+            

@@ -1,0 +1,14 @@
+components:
+  schemas:
+    ErrorResponseBody:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 비즈니스 에러 코드
+        msg:
+          type: string
+          description: 에러 메시지
+      example:
+        code: 400
+        msg: "'id' 값을 입력해 주세요"

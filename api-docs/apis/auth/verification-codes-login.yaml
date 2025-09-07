@@ -1,0 +1,31 @@
+paths:
+  /auth/verification-codes/login:
+    post:
+      summary: 로그인 인증번호 발송
+      description: |
+        사용자가 로그인 시 아이디와 비밀번호를 검증하고, 등록된 휴대폰 번호로 인증번호를 발송하는 API 입니다.
+        
+        해당 인증번호는 로그인 검증용으로 사용되며, 10분간 유효합니다.
+
+        이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)
+        - `400` : 유효성 검증 실패
+        - `404` : 파일(자원) 찾기 실패
+        - `1002` : 기준 횟수(10회) 이상의 인증번호 요청
+        - `1003` : 기준 시간 (30초) 미만 간격의 인증번호 요청
+        - `1004` : 인증번호 발송 실패
+        - `1008` : 로그인 실패
+      operationId: createLoginVerificationCode
+      security: []
+      requestBody:
+        $ref: '../../components/request-bodies/verification-code-login.yaml#/components/requestBodies/ReqeustBody'
+      responses:
+        '200':
+          description: 요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 `code`, `msg` 필드로 구분합니다.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '../../components/response-bodies/success-empty-response.yaml#/components/schemas/ResponseBody'
+                  - $ref: '../../components/response-bodies/error-response.yaml#/components/schemas/ErrorResponseBody'
+
+            

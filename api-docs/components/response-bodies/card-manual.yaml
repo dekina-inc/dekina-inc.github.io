@@ -1,0 +1,17 @@
+components:
+  schemas:
+    ResponseBody:
+      title: ResponseBody
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 거래내역 고유 식별 아이디
+        cardToken:
+          type: string
+          description: 카드정보 고유 식별 아이디 (저장 결제로 요청한 경우 포함)
+      example:
+        id: 68b62d6ef3775a1369b4edc1
+        cardToken: 68b62d82f3775a1369b4edcf

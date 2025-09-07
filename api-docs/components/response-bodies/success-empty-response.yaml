@@ -1,0 +1,7 @@
+components:
+  schemas:
+    title: ResponseBody
+    ResponseBody:
+      type: object
+      description: 성공 시 빈 객체 반환
+      example: {}

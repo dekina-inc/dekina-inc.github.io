@@ -1,0 +1,79 @@
+components:
+  requestBodies:
+    ReqeustBody:
+      description: 카드결제 요청 본문
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - amount
+            properties:
+              # API 키
+              client:
+                type: string
+                description: 공개 API 키
+              secret:
+                type: string
+                description: 비밀 API 키
+              # 결제 카드 정보
+              cardNumber:
+                type: string
+                description: 카드번호
+              cardValidationMonth:
+                type: string
+                description: 카드 유효기간 월
+              cardValidationYear:
+                type: string
+                description: 카드 유효기간 연도
+              cardId:
+                type: string
+                description: 카드 고유 식별 ID
+              # 금액
+              amount:
+                type: number
+                description: 결제 금액
+              # 구매자 정보
+              name:
+                type: string
+                description: 구매자 명
+              email:
+                type: string
+                description: 구매자 이메일
+              phoneNumber:
+                type: string
+                description: 구매자 휴대폰 번호
+              ip:
+                type: string
+                description: 구매자 IP 주소
+              # 카드정보 저장 여부
+              save:
+                type: boolean
+                description: 카드정보 저장 여부
+              # 상품 정보
+              product:
+                type: object
+                description: 상품 정보
+                properties: 
+                  name: 
+                    type: string
+                    description: 상품 명
+                  type: 
+                    type: string
+                    description: 상품 구분 (Online, Offline)
+            example:
+              client: BXTU9YhZ9vgwZNOm90gpeiJFdb10wx
+              secret: izcfjjaxoyZWoUB3KVD2SafeEax8ob
+              cardValidationYear: "30"
+              cardValidationMonth: "04"
+              amount: 100
+              name: 홍길동
+              email: killdong@test.com
+              phoneNumber: +821000000000"
+              ip: 127.0.0.1
+              save: false
+              product:
+                name: 사과10kg
+                type: Offline
+
+              

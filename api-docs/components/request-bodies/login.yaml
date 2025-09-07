@@ -1,0 +1,26 @@
+components:
+  requestBodies:
+    ReqeustBody:
+      description: 로그인 요청 본문
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id
+              - pw
+              - code
+            properties:
+              id:
+                type: string
+                description: 사용자 아이디
+              pw:
+                type: string
+                description: 사용자 비밀번호
+              code:
+                type: string
+                description: 사용자 인증번호(verification-code(사용자 로그인 인증번호 발송) API를 통해 발송된 인증번호)
+            example:
+              id: test123
+              pw: qwer123@
+              code: "123456"
