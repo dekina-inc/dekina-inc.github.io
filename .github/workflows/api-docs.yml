@@ -18,15 +18,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
-          cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Build Redoc (public docs)
-        run: |
-          mkdir -p public
-          yarn redocly build-docs api-docs/openapi-public.yaml -o public/index.html
+        run: npm run build-docs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
