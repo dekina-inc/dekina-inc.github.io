@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8" />
+  <title>Dekina API</title>
+  <!-- needed for adaptive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <script src="https://cdn.redocly.com/redoc/v2.5.0/bundles/redoc.standalone.js"></script><style data-styled="true" data-styled-version="6.1.19">.fqkwbU{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.fqkwbU{width:100%;padding:40px 40px;}}/*!sc*/
+.dCzIPc{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.dCzIPc{width:100%;padding:0px 40px;}}/*!sc*/
+data-styled.g4[id="sc-ggWZvA"]{content:"fqkwbU,dCzIPc,"}/*!sc*/
+.bPmFpz{padding:40px 0;}/*!sc*/
+.bPmFpz:last-child{min-height:calc(100vh + 1px);}/*!sc*/
+.bPmFpz>.bPmFpz:last-child{min-height:initial;}/*!sc*/
+@media print,screen and (max-width: 75rem){.bPmFpz{padding:0;}}/*!sc*/
+.gHrCVQ{padding:40px 0;position:relative;}/*!sc*/
+.gHrCVQ:last-child{min-height:calc(100vh + 1px);}/*!sc*/
+.gHrCVQ>.gHrCVQ:last-child{min-height:initial;}/*!sc*/
+@media print,screen and (max-width: 75rem){.gHrCVQ{padding:0;}}/*!sc*/
+.gHrCVQ:not(:last-of-type):after{position:absolute;bottom:0;width:100%;display:block;content:'';border-bottom:1px solid rgba(0, 0, 0, 0.2);}/*!sc*/
+data-styled.g5[id="sc-dTvVRJ"]{content:"bPmFpz,gHrCVQ,"}/*!sc*/
+.bDYKKx{width:40%;color:#ffffff;background-color:#263238;padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.bDYKKx{width:100%;padding:40px 40px;}}/*!sc*/
+data-styled.g6[id="sc-jwTyAe"]{content:"bDYKKx,"}/*!sc*/
+.FFPsr{background-color:#263238;}/*!sc*/
+data-styled.g7[id="sc-hjsuWn"]{content:"FFPsr,"}/*!sc*/
+.gkiSyE{display:flex;width:100%;padding:0;}/*!sc*/
+@media print,screen and (max-width: 75rem){.gkiSyE{flex-direction:column;}}/*!sc*/
+data-styled.g8[id="sc-jJLAfE"]{content:"gkiSyE,"}/*!sc*/
+.wYHiz{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#333333;}/*!sc*/
+data-styled.g9[id="sc-hwkwBN"]{content:"wYHiz,"}/*!sc*/
+.iFSqkw{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;margin:0 0 20px;}/*!sc*/
+data-styled.g10[id="sc-kNOymR"]{content:"iFSqkw,"}/*!sc*/
+.cXqSZD{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.27em;line-height:1.6em;color:#333333;}/*!sc*/
+data-styled.g11[id="sc-dYwGCk"]{content:"cXqSZD,"}/*!sc*/
+.drJHMo{color:#ffffff;}/*!sc*/
+data-styled.g12[id="sc-lgpSej"]{content:"drJHMo,"}/*!sc*/
+.czjApA{border-bottom:1px solid rgba(38, 50, 56, 0.3);margin:1em 0 1em 0;color:rgba(38, 50, 56, 0.5);font-weight:normal;text-transform:uppercase;font-size:0.929em;line-height:20px;}/*!sc*/
+data-styled.g13[id="sc-eqYatC"]{content:"czjApA,"}/*!sc*/
+.fRdsOi{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.fRdsOi:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+h1:hover>.fRdsOi::before,h2:hover>.fRdsOi::before,.fRdsOi:hover::before{visibility:visible;}/*!sc*/
+data-styled.g14[id="sc-kcLKEh"]{content:"fRdsOi,"}/*!sc*/
+.dUlzCe{height:18px;width:18px;min-width:18px;vertical-align:middle;float:right;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.cGxVlA{height:1.5em;width:1.5em;min-width:1.5em;vertical-align:middle;float:left;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.cGxVlA polygon{fill:#1d8127;}/*!sc*/
+.iuNpUs{height:20px;width:20px;min-width:20px;vertical-align:middle;float:right;transition:transform 0.2s ease-out;transform:rotateZ(0);}/*!sc*/
+.iuNpUs polygon{fill:white;}/*!sc*/
+.dOPmTa{height:18px;width:18px;min-width:18px;vertical-align:middle;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+data-styled.g15[id="sc-dntSTA"]{content:"dUlzCe,cGxVlA,iuNpUs,dOPmTa,"}/*!sc*/
+.gdmNWp{border-left:1px solid #7c7cbb;box-sizing:border-box;position:relative;padding:10px 10px 10px 0;}/*!sc*/
+@media screen and (max-width: 50rem){.gdmNWp{display:block;overflow:hidden;}}/*!sc*/
+tr:first-of-type>.gdmNWp,tr.last>.gdmNWp{border-left-width:0;background-position:top left;background-repeat:no-repeat;background-size:1px 100%;}/*!sc*/
+tr:first-of-type>.gdmNWp{background-image:linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 22px,
+      #7c7cbb 22px,
+      #7c7cbb 100%
+    );}/*!sc*/
+tr.last>.gdmNWp{background-image:linear-gradient(
+      to bottom,
+      #7c7cbb 0%,
+      #7c7cbb 22px,
+      transparent 22px,
+      transparent 100%
+    );}/*!sc*/
+tr.last+tr>.gdmNWp{border-left-color:transparent;}/*!sc*/
+tr.last:first-child>.gdmNWp{background:none;border-left-color:transparent;}/*!sc*/
+data-styled.g18[id="sc-kCuUfV"]{content:"gdmNWp,"}/*!sc*/
+.dFOJWJ{vertical-align:top;line-height:20px;white-space:nowrap;font-size:13px;font-family:Courier,monospace;}/*!sc*/
+.dFOJWJ.deprecated{text-decoration:line-through;color:#707070;}/*!sc*/
+data-styled.g20[id="sc-fbQrwq"]{content:"dFOJWJ,"}/*!sc*/
+.ixGaBD{border-bottom:1px solid #9fb4be;padding:10px 0;width:75%;box-sizing:border-box;}/*!sc*/
+tr.expanded .ixGaBD{border-bottom:none;}/*!sc*/
+@media screen and (max-width: 50rem){.ixGaBD{padding:0 20px;border-bottom:none;border-left:1px solid #7c7cbb;}tr.last>.ixGaBD{border-left:none;}}/*!sc*/
+data-styled.g21[id="sc-gGKoUb"]{content:"ixGaBD,"}/*!sc*/
+.cteAyA{color:#7c7cbb;font-family:Courier,monospace;margin-right:10px;}/*!sc*/
+.cteAyA::before{content:'';display:inline-block;vertical-align:middle;width:10px;height:1px;background:#7c7cbb;}/*!sc*/
+.cteAyA::after{content:'';display:inline-block;vertical-align:middle;width:1px;background:#7c7cbb;height:7px;}/*!sc*/
+data-styled.g22[id="sc-hwddKA"]{content:"cteAyA,"}/*!sc*/
+.icJLQx{border-collapse:separate;border-radius:3px;font-size:14px;border-spacing:0;width:100%;}/*!sc*/
+.icJLQx >tr{vertical-align:middle;}/*!sc*/
+@media screen and (max-width: 50rem){.icJLQx{display:block;}.icJLQx >tr,.icJLQx >tbody>tr{display:block;}}/*!sc*/
+@media screen and (max-width: 50rem) and (-ms-high-contrast:none){.icJLQx td{float:left;width:100%;}}/*!sc*/
+.icJLQx .sc-jaXbil,.icJLQx .sc-jaXbil .sc-jaXbil .sc-jaXbil,.icJLQx .sc-jaXbil .sc-jaXbil .sc-jaXbil .sc-jaXbil .sc-jaXbil{margin:1em;margin-right:0;background:#fafafa;}/*!sc*/
+.icJLQx .sc-jaXbil .sc-jaXbil,.icJLQx .sc-jaXbil .sc-jaXbil .sc-jaXbil .sc-jaXbil,.icJLQx .sc-jaXbil .sc-jaXbil .sc-jaXbil .sc-jaXbil .sc-jaXbil .sc-jaXbil{background:#ffffff;}/*!sc*/
+data-styled.g24[id="sc-eqNDNG"]{content:"icJLQx,"}/*!sc*/
+.fyxuKi >ul{list-style:none;padding:0;margin:0;margin:0 -5px;}/*!sc*/
+.fyxuKi >ul >li{padding:5px 10px;display:inline-block;background-color:#11171a;border-bottom:1px solid rgba(0, 0, 0, 0.5);cursor:pointer;text-align:center;outline:none;color:#ccc;margin:0 5px 5px 5px;border:1px solid #07090b;border-radius:5px;min-width:60px;font-size:0.9em;font-weight:bold;}/*!sc*/
+.fyxuKi >ul >li.react-tabs__tab--selected{color:#333333;background:#ffffff;}/*!sc*/
+.fyxuKi >ul >li.react-tabs__tab--selected:focus{outline:auto;}/*!sc*/
+.fyxuKi >ul >li:only-child{flex:none;min-width:100px;}/*!sc*/
+.fyxuKi >ul >li.tab-success{color:#1d8127;}/*!sc*/
+.fyxuKi >ul >li.tab-redirect{color:#ffa500;}/*!sc*/
+.fyxuKi >ul >li.tab-info{color:#87ceeb;}/*!sc*/
+.fyxuKi >ul >li.tab-error{color:#d41f1c;}/*!sc*/
+.fyxuKi >.react-tabs__tab-panel{background:#11171a;}/*!sc*/
+.fyxuKi >.react-tabs__tab-panel>div,.fyxuKi >.react-tabs__tab-panel>pre{padding:20px;margin:0;}/*!sc*/
+.fyxuKi >.react-tabs__tab-panel>div>pre{padding:0;}/*!sc*/
+data-styled.g30[id="sc-cOpnSz"]{content:"fyxuKi,"}/*!sc*/
+.kIppRw code[class*='language-'],.kIppRw pre[class*='language-']{text-shadow:0 -0.1em 0.2em black;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;}/*!sc*/
+@media print{.kIppRw code[class*='language-'],.kIppRw pre[class*='language-']{text-shadow:none;}}/*!sc*/
+.kIppRw pre[class*='language-']{padding:1em;margin:0.5em 0;overflow:auto;}/*!sc*/
+.kIppRw .token.comment,.kIppRw .token.prolog,.kIppRw .token.doctype,.kIppRw .token.cdata{color:hsl(30, 20%, 50%);}/*!sc*/
+.kIppRw .token.punctuation{opacity:0.7;}/*!sc*/
+.kIppRw .namespace{opacity:0.7;}/*!sc*/
+.kIppRw .token.property,.kIppRw .token.tag,.kIppRw .token.number,.kIppRw .token.constant,.kIppRw .token.symbol{color:#4a8bb3;}/*!sc*/
+.kIppRw .token.boolean{color:#e64441;}/*!sc*/
+.kIppRw .token.selector,.kIppRw .token.attr-name,.kIppRw .token.string,.kIppRw .token.char,.kIppRw .token.builtin,.kIppRw .token.inserted{color:#a0fbaa;}/*!sc*/
+.kIppRw .token.selector+a,.kIppRw .token.attr-name+a,.kIppRw .token.string+a,.kIppRw .token.char+a,.kIppRw .token.builtin+a,.kIppRw .token.inserted+a,.kIppRw .token.selector+a:visited,.kIppRw .token.attr-name+a:visited,.kIppRw .token.string+a:visited,.kIppRw .token.char+a:visited,.kIppRw .token.builtin+a:visited,.kIppRw .token.inserted+a:visited{color:#4ed2ba;text-decoration:underline;}/*!sc*/
+.kIppRw .token.property.string{color:white;}/*!sc*/
+.kIppRw .token.operator,.kIppRw .token.entity,.kIppRw .token.url,.kIppRw .token.variable{color:hsl(40, 90%, 60%);}/*!sc*/
+.kIppRw .token.atrule,.kIppRw .token.attr-value,.kIppRw .token.keyword{color:hsl(350, 40%, 70%);}/*!sc*/
+.kIppRw .token.regex,.kIppRw .token.important{color:#e90;}/*!sc*/
+.kIppRw .token.important,.kIppRw .token.bold{font-weight:bold;}/*!sc*/
+.kIppRw .token.italic{font-style:italic;}/*!sc*/
+.kIppRw .token.entity{cursor:help;}/*!sc*/
+.kIppRw .token.deleted{color:red;}/*!sc*/
+data-styled.g32[id="sc-eVqvcJ"]{content:"kIppRw,"}/*!sc*/
+.bBWkcI{opacity:0.7;transition:opacity 0.3s ease;text-align:right;}/*!sc*/
+.bBWkcI:focus-within{opacity:1;}/*!sc*/
+.bBWkcI >button{background-color:transparent;border:0;color:inherit;padding:2px 10px;font-family:Roboto,sans-serif;font-size:14px;line-height:1.5em;cursor:pointer;outline:0;}/*!sc*/
+.bBWkcI >button :hover,.bBWkcI >button :focus{background:rgba(255, 255, 255, 0.1);}/*!sc*/
+data-styled.g33[id="sc-bbbBoY"]{content:"bBWkcI,"}/*!sc*/
+.ghzOpX{position:relative;}/*!sc*/
+data-styled.g37[id="sc-eknHtZ"]{content:"ghzOpX,"}/*!sc*/
+.eyTvTk{position:absolute;pointer-events:none;z-index:1;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);right:8px;margin:auto;text-align:center;}/*!sc*/
+.eyTvTk polyline{color:white;}/*!sc*/
+data-styled.g38[id="sc-pYNGo"]{content:"eyTvTk,"}/*!sc*/
+.dbfEBv{box-sizing:border-box;min-width:100px;outline:none;display:inline-block;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.5);vertical-align:bottom;padding:2px 0px 2px 6px;position:relative;width:auto;background:white;color:#263238;font-family:Montserrat,sans-serif;font-size:0.929em;line-height:1.5em;cursor:pointer;transition:border 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;}/*!sc*/
+.dbfEBv label{box-sizing:border-box;min-width:100px;outline:none;display:inline-block;font-family:Montserrat,sans-serif;color:#333333;vertical-align:bottom;width:auto;text-transform:none;padding:0 22px 0 4px;font-size:0.929em;line-height:1.5em;font-family:inherit;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}/*!sc*/
+.dbfEBv .dropdown-select{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;border:none;appearance:none;cursor:pointer;color:#333333;line-height:inherit;font-family:inherit;}/*!sc*/
+.dbfEBv:hover,.dbfEBv:focus-within{border:1px solid #32329f;color:#32329f;box-shadow:0px 0px 0px 1px #32329f;}/*!sc*/
+data-styled.g39[id="sc-cCVJLD"]{content:"dbfEBv,"}/*!sc*/
+.cFlAeY{margin-left:10px;text-transform:none;font-size:0.929em;color:black;}/*!sc*/
+data-styled.g41[id="sc-dNFkOE"]{content:"cFlAeY,"}/*!sc*/
+.kbZred{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.kbZred p:last-child{margin-bottom:0;}/*!sc*/
+.kbZred h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.kbZred h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.kbZred code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.kbZred pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.kbZred pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.kbZred pre code:before,.kbZred pre code:after{content:none;}/*!sc*/
+.kbZred blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.kbZred img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.kbZred ul,.kbZred ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.kbZred ul ul,.kbZred ol ul,.kbZred ul ol,.kbZred ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.kbZred table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.kbZred table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.kbZred table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.kbZred table th,.kbZred table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.kbZred table th{text-align:left;font-weight:bold;}/*!sc*/
+.kbZred .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.kbZred .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.kbZred h1:hover>.share-link::before,.kbZred h2:hover>.share-link::before,.kbZred .share-link:hover::before{visibility:visible;}/*!sc*/
+.kbZred a{text-decoration:auto;color:#32329f;}/*!sc*/
+.kbZred a:visited{color:#32329f;}/*!sc*/
+.kbZred a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+.drqpJr{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.drqpJr p:last-child{margin-bottom:0;}/*!sc*/
+.drqpJr p:first-child{margin-top:0;}/*!sc*/
+.drqpJr p:last-child{margin-bottom:0;}/*!sc*/
+.drqpJr h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.drqpJr h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.drqpJr code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.drqpJr pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.drqpJr pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.drqpJr pre code:before,.drqpJr pre code:after{content:none;}/*!sc*/
+.drqpJr blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.drqpJr img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.drqpJr ul,.drqpJr ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.drqpJr ul ul,.drqpJr ol ul,.drqpJr ul ol,.drqpJr ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.drqpJr table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.drqpJr table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.drqpJr table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.drqpJr table th,.drqpJr table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.drqpJr table th{text-align:left;font-weight:bold;}/*!sc*/
+.drqpJr .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.drqpJr .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.drqpJr h1:hover>.share-link::before,.drqpJr h2:hover>.share-link::before,.drqpJr .share-link:hover::before{visibility:visible;}/*!sc*/
+.drqpJr a{text-decoration:auto;color:#32329f;}/*!sc*/
+.drqpJr a:visited{color:#32329f;}/*!sc*/
+.drqpJr a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+.jnwENr{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.jnwENr p:last-child{margin-bottom:0;}/*!sc*/
+.jnwENr p:first-child{margin-top:0;}/*!sc*/
+.jnwENr p:last-child{margin-bottom:0;}/*!sc*/
+.jnwENr p{display:inline-block;}/*!sc*/
+.jnwENr h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.jnwENr h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.jnwENr code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.jnwENr pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.jnwENr pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.jnwENr pre code:before,.jnwENr pre code:after{content:none;}/*!sc*/
+.jnwENr blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.jnwENr img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.jnwENr ul,.jnwENr ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.jnwENr ul ul,.jnwENr ol ul,.jnwENr ul ol,.jnwENr ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.jnwENr table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.jnwENr table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.jnwENr table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.jnwENr table th,.jnwENr table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.jnwENr table th{text-align:left;font-weight:bold;}/*!sc*/
+.jnwENr .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.jnwENr .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.jnwENr h1:hover>.share-link::before,.jnwENr h2:hover>.share-link::before,.jnwENr .share-link:hover::before{visibility:visible;}/*!sc*/
+.jnwENr a{text-decoration:auto;color:#32329f;}/*!sc*/
+.jnwENr a:visited{color:#32329f;}/*!sc*/
+.jnwENr a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+data-styled.g42[id="sc-fszimp"]{content:"kbZred,drqpJr,jnwENr,"}/*!sc*/
+.ljKHqG{display:inline;}/*!sc*/
+data-styled.g43[id="sc-etsjJW"]{content:"ljKHqG,"}/*!sc*/
+.iNCOCX{position:relative;}/*!sc*/
+data-styled.g44[id="sc-fYmhhH"]{content:"iNCOCX,"}/*!sc*/
+.fdRrNy:hover>.sc-bbbBoY{opacity:1;}/*!sc*/
+data-styled.g49[id="sc-dClGHI"]{content:"fdRrNy,"}/*!sc*/
+.dFvLDb{font-family:Courier,monospace;font-size:13px;white-space:pre;contain:content;overflow-x:auto;}/*!sc*/
+.dFvLDb .redoc-json code>.collapser{display:none;pointer-events:none;}/*!sc*/
+.dFvLDb .callback-function{color:gray;}/*!sc*/
+.dFvLDb .collapser:after{content:'-';cursor:pointer;}/*!sc*/
+.dFvLDb .collapsed>.collapser:after{content:'+';cursor:pointer;}/*!sc*/
+.dFvLDb .ellipsis:after{content:' … ';}/*!sc*/
+.dFvLDb .collapsible{margin-left:2em;}/*!sc*/
+.dFvLDb .hoverable{padding-top:1px;padding-bottom:1px;padding-left:2px;padding-right:2px;border-radius:2px;}/*!sc*/
+.dFvLDb .hovered{background-color:rgba(235, 238, 249, 1);}/*!sc*/
+.dFvLDb .collapser{background-color:transparent;border:0;color:#fff;font-family:Courier,monospace;font-size:13px;padding-right:6px;padding-left:6px;padding-top:0;padding-bottom:0;display:flex;align-items:center;justify-content:center;width:15px;height:15px;position:absolute;top:4px;left:-1.5em;cursor:default;user-select:none;-webkit-user-select:none;padding:2px;}/*!sc*/
+.dFvLDb .collapser:focus{outline-color:#fff;outline-style:dotted;outline-width:1px;}/*!sc*/
+.dFvLDb ul{list-style-type:none;padding:0px;margin:0px 0px 0px 26px;}/*!sc*/
+.dFvLDb li{position:relative;display:block;}/*!sc*/
+.dFvLDb .hoverable{display:inline-block;}/*!sc*/
+.dFvLDb .selected{outline-style:solid;outline-width:1px;outline-style:dotted;}/*!sc*/
+.dFvLDb .collapsed>.collapsible{display:none;}/*!sc*/
+.dFvLDb .ellipsis{display:none;}/*!sc*/
+.dFvLDb .collapsed>.ellipsis{display:inherit;}/*!sc*/
+data-styled.g50[id="sc-fhfEft"]{content:"dFvLDb,"}/*!sc*/
+.iNRAJK{padding:0.9em;background-color:rgba(38,50,56,0.4);margin:0 0 10px 0;display:block;font-family:Montserrat,sans-serif;font-size:0.929em;line-height:1.5em;}/*!sc*/
+data-styled.g51[id="sc-bAehkN"]{content:"iNRAJK,"}/*!sc*/
+.cXitJ{font-family:Montserrat,sans-serif;font-size:12px;position:absolute;z-index:1;top:-11px;left:12px;font-weight:600;color:rgba(255,255,255,0.7);}/*!sc*/
+data-styled.g52[id="sc-gahYZc"]{content:"cXitJ,"}/*!sc*/
+.iLdyBp{position:relative;}/*!sc*/
+data-styled.g53[id="sc-bSFBcf"]{content:"iLdyBp,"}/*!sc*/
+.ehbHlf{margin:0 0 10px 0;display:block;background-color:rgba(38,50,56,0.4);border:none;padding:0.9em 1.6em 0.9em 0.9em;box-shadow:none;}/*!sc*/
+.ehbHlf label{color:#ffffff;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:1em;text-transform:none;border:none;}/*!sc*/
+.ehbHlf:hover,.ehbHlf:focus-within{border:none;box-shadow:none;background-color:rgba(38,50,56,0.7);}/*!sc*/
+data-styled.g54[id="sc-gsJsQu"]{content:"ehbHlf,"}/*!sc*/
+.eKKwxo{margin-top:15px;}/*!sc*/
+data-styled.g56[id="sc-blIAwI"]{content:"eKKwxo,"}/*!sc*/
+.kdPQHX.deprecated span.property-name{text-decoration:line-through;color:#707070;}/*!sc*/
+.kdPQHX button{background-color:transparent;border:0;outline:0;font-size:13px;font-family:Courier,monospace;cursor:pointer;padding:0;color:#333333;}/*!sc*/
+.kdPQHX button:focus{font-weight:600;}/*!sc*/
+.kdPQHX .sc-dntSTA{height:1.1em;width:1.1em;}/*!sc*/
+.kdPQHX .sc-dntSTA polygon{fill:#666;}/*!sc*/
+data-styled.g57[id="sc-itBLYH"]{content:"kdPQHX,"}/*!sc*/
+.lhyyLL{vertical-align:middle;font-size:13px;line-height:20px;}/*!sc*/
+data-styled.g58[id="sc-bEjUoa"]{content:"lhyyLL,"}/*!sc*/
+.jYezsP{color:rgba(102,102,102,0.9);}/*!sc*/
+data-styled.g59[id="sc-boKDdR"]{content:"jYezsP,"}/*!sc*/
+.dbKJYq{color:#666;}/*!sc*/
+data-styled.g60[id="sc-fOOuSg"]{content:"dbKJYq,"}/*!sc*/
+.crXmiY{color:#d41f1c;font-size:0.9em;font-weight:normal;margin-left:20px;line-height:1;}/*!sc*/
+data-styled.g62[id="sc-iIvHqT"]{content:"crXmiY,"}/*!sc*/
+.hPcPCj{margin-top:0;margin-bottom:0.5em;}/*!sc*/
+data-styled.g92[id="sc-jCWzJg"]{content:"hPcPCj,"}/*!sc*/
+.hijBKj::before{content:'|';display:inline-block;opacity:0.5;width:15px;text-align:center;}/*!sc*/
+.hijBKj:last-child::after{display:none;}/*!sc*/
+data-styled.g94[id="sc-jVxTAy"]{content:"hijBKj,"}/*!sc*/
+.eAqtbt{overflow:hidden;}/*!sc*/
+data-styled.g95[id="sc-erPUmh"]{content:"eAqtbt,"}/*!sc*/
+.beOrEi{display:flex;flex-wrap:wrap;margin-left:-15px;}/*!sc*/
+data-styled.g96[id="sc-iRTMaw"]{content:"beOrEi,"}/*!sc*/
+.NmQLu{width:9ex;display:inline-block;height:13px;line-height:13px;background-color:#333;border-radius:3px;background-repeat:no-repeat;background-position:6px 4px;font-size:7px;font-family:Verdana,sans-serif;color:white;text-transform:uppercase;text-align:center;font-weight:bold;vertical-align:middle;margin-right:6px;margin-top:2px;}/*!sc*/
+.NmQLu.get{background-color:#2F8132;}/*!sc*/
+.NmQLu.post{background-color:#186FAF;}/*!sc*/
+.NmQLu.put{background-color:#95507c;}/*!sc*/
+.NmQLu.options{background-color:#947014;}/*!sc*/
+.NmQLu.patch{background-color:#bf581d;}/*!sc*/
+.NmQLu.delete{background-color:#cc3333;}/*!sc*/
+.NmQLu.basic{background-color:#707070;}/*!sc*/
+.NmQLu.link{background-color:#07818F;}/*!sc*/
+.NmQLu.head{background-color:#A23DAD;}/*!sc*/
+.NmQLu.hook{background-color:#32329f;}/*!sc*/
+.NmQLu.schema{background-color:#707070;}/*!sc*/
+data-styled.g100[id="sc-jxYSNo"]{content:"NmQLu,"}/*!sc*/
+.gAPKXX{margin:0;padding:0;}/*!sc*/
+.gAPKXX:first-child{padding-bottom:32px;}/*!sc*/
+.sc-zOxLx .sc-zOxLx{font-size:0.929em;}/*!sc*/
+.dQnkdy{margin:0;padding:0;display:none;}/*!sc*/
+.dQnkdy:first-child{padding-bottom:32px;}/*!sc*/
+.sc-zOxLx .sc-zOxLx{font-size:0.929em;}/*!sc*/
+data-styled.g101[id="sc-zOxLx"]{content:"gAPKXX,dQnkdy,"}/*!sc*/
+.ixknQI{list-style:none inside none;overflow:hidden;text-overflow:ellipsis;padding:0;}/*!sc*/
+data-styled.g102[id="sc-cgHfjM"]{content:"ixknQI,"}/*!sc*/
+.lgPGwq{cursor:pointer;color:#333333;margin:0;padding:12.5px 20px;display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;font-size:0.929em;text-transform:none;background-color:#fafafa;}/*!sc*/
+.lgPGwq:hover{color:#32329f;background-color:#e1e1e1;}/*!sc*/
+.lgPGwq .sc-dntSTA{height:1.5em;width:1.5em;}/*!sc*/
+.lgPGwq .sc-dntSTA polygon{fill:#333333;}/*!sc*/
+.fTDmgC{cursor:pointer;color:#333333;margin:0;padding:12.5px 20px;padding-left:40px;display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;background-color:#fafafa;}/*!sc*/
+.fTDmgC:hover{color:#32329f;background-color:#ededed;}/*!sc*/
+.fTDmgC .sc-dntSTA{height:1.5em;width:1.5em;}/*!sc*/
+.fTDmgC .sc-dntSTA polygon{fill:#333333;}/*!sc*/
+.iHRgeo{cursor:pointer;color:#333333;margin:0;padding:12.5px 20px;display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;background-color:#fafafa;}/*!sc*/
+.iHRgeo:hover{color:#32329f;background-color:#ededed;}/*!sc*/
+.iHRgeo .sc-dntSTA{height:1.5em;width:1.5em;}/*!sc*/
+.iHRgeo .sc-dntSTA polygon{fill:#333333;}/*!sc*/
+data-styled.g103[id="sc-fpikKz"]{content:"lgPGwq,fTDmgC,iHRgeo,"}/*!sc*/
+.cxcra{display:inline-block;vertical-align:middle;width:calc(100% - 38px);overflow:hidden;text-overflow:ellipsis;}/*!sc*/
+data-styled.g104[id="sc-gWaSiO"]{content:"cxcra,"}/*!sc*/
+.QuyG{font-size:0.8em;margin-top:10px;text-align:center;position:fixed;width:260px;bottom:0;background:#fafafa;}/*!sc*/
+.QuyG a,.QuyG a:visited,.QuyG a:hover{color:#333333!important;padding:5px 0;border-top:1px solid #e1e1e1;text-decoration:none;display:flex;align-items:center;justify-content:center;}/*!sc*/
+.QuyG img{width:15px;margin-right:5px;}/*!sc*/
+@media screen and (max-width: 50rem){.QuyG{width:100%;}}/*!sc*/
+data-styled.g105[id="sc-kSaXSp"]{content:"QuyG,"}/*!sc*/
+.jjnszm{cursor:pointer;position:relative;margin-bottom:5px;}/*!sc*/
+data-styled.g111[id="sc-eZSpzM"]{content:"jjnszm,"}/*!sc*/
+.kZcHWP{font-family:Courier,monospace;margin-left:10px;flex:1;overflow-x:hidden;text-overflow:ellipsis;}/*!sc*/
+data-styled.g112[id="sc-jvKoal"]{content:"kZcHWP,"}/*!sc*/
+.iPCVMX{outline:0;color:inherit;width:100%;text-align:left;cursor:pointer;padding:10px 30px 10px 20px;border-radius:4px 4px 0 0;background-color:#11171a;display:flex;white-space:nowrap;align-items:center;border:1px solid transparent;border-bottom:0;transition:border-color 0.25s ease;}/*!sc*/
+.iPCVMX ..sc-jvKoal{color:#ffffff;}/*!sc*/
+.iPCVMX:focus{box-shadow:inset 0 2px 2px rgba(0, 0, 0, 0.45),0 2px 0 rgba(128, 128, 128, 0.25);}/*!sc*/
+data-styled.g113[id="sc-buTqWO"]{content:"iPCVMX,"}/*!sc*/
+.kwcmyC{font-size:0.929em;line-height:20px;background-color:#186FAF;color:#ffffff;padding:3px 10px;text-transform:uppercase;font-family:Montserrat,sans-serif;margin:0;}/*!sc*/
+data-styled.g114[id="sc-fQLpxn"]{content:"kwcmyC,"}/*!sc*/
+.ga-DQLq{position:absolute;width:100%;z-index:100;background:#fafafa;color:#263238;box-sizing:border-box;box-shadow:0 0 6px rgba(0, 0, 0, 0.33);overflow:hidden;border-bottom-left-radius:4px;border-bottom-right-radius:4px;transition:all 0.25s ease;visibility:hidden;transform:translateY(-50%) scaleY(0);}/*!sc*/
+data-styled.g115[id="sc-ecJghI"]{content:"ga-DQLq,"}/*!sc*/
+.icOxsG{padding:10px;}/*!sc*/
+data-styled.g116[id="sc-iyBeIh"]{content:"icOxsG,"}/*!sc*/
+.okJpy{padding:5px;border:1px solid #ccc;background:#fff;word-break:break-all;color:#32329f;}/*!sc*/
+.okJpy >span{color:#333333;}/*!sc*/
+data-styled.g117[id="sc-xKhEK"]{content:"okJpy,"}/*!sc*/
+.lkmdtA{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#1d8127;background-color:rgba(29,129,39,0.07);}/*!sc*/
+.lkmdtA:focus{outline:auto #1d8127;}/*!sc*/
+data-styled.g120[id="sc-jIDBmd"]{content:"lkmdtA,"}/*!sc*/
+.fBhAXU{vertical-align:top;}/*!sc*/
+data-styled.g123[id="sc-eJvlPh"]{content:"fBhAXU,"}/*!sc*/
+.kjrVcG{font-size:1.3em;padding:0.2em 0;margin:3em 0 1.1em;color:#333333;font-weight:normal;}/*!sc*/
+data-styled.g124[id="sc-gDzyrw"]{content:"kjrVcG,"}/*!sc*/
+.txIPi{margin-bottom:30px;}/*!sc*/
+data-styled.g129[id="sc-bfjeOH"]{content:"txIPi,"}/*!sc*/
+.crXcHD{user-select:none;width:20px;height:20px;align-self:center;display:flex;flex-direction:column;color:#32329f;}/*!sc*/
+data-styled.g130[id="sc-cZnrqW"]{content:"crXcHD,"}/*!sc*/
+.dsiHUZ{width:260px;background-color:#fafafa;overflow:hidden;display:flex;flex-direction:column;backface-visibility:hidden;height:100vh;position:sticky;position:-webkit-sticky;top:0;}/*!sc*/
+@media screen and (max-width: 50rem){.dsiHUZ{position:fixed;z-index:20;width:100%;background:#fafafa;display:none;}}/*!sc*/
+@media print{.dsiHUZ{display:none;}}/*!sc*/
+data-styled.g131[id="sc-fstJre"]{content:"dsiHUZ,"}/*!sc*/
+.bovaLG{outline:none;user-select:none;background-color:#f2f2f2;color:#32329f;display:none;cursor:pointer;position:fixed;right:20px;z-index:100;border-radius:50%;box-shadow:0 0 20px rgba(0, 0, 0, 0.3);bottom:44px;width:60px;height:60px;padding:0 20px;}/*!sc*/
+@media screen and (max-width: 50rem){.bovaLG{display:flex;}}/*!sc*/
+.bovaLG svg{color:#0065FB;}/*!sc*/
+@media print{.bovaLG{display:none;}}/*!sc*/
+data-styled.g132[id="sc-jOlHRD"]{content:"bovaLG,"}/*!sc*/
+.eHdqcJ{font-family:Roboto,sans-serif;font-size:14px;font-weight:400;line-height:1.5em;color:#333333;display:flex;position:relative;text-align:left;-webkit-font-smoothing:antialiased;font-smoothing:antialiased;text-rendering:optimizeSpeed!important;tap-highlight-color:rgba(0, 0, 0, 0);text-size-adjust:100%;}/*!sc*/
+.eHdqcJ *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(255, 255, 255, 0);}/*!sc*/
+data-styled.g133[id="sc-Pgsbw"]{content:"eHdqcJ,"}/*!sc*/
+.buanwU{z-index:1;position:relative;overflow:hidden;width:calc(100% - 260px);contain:layout;}/*!sc*/
+@media print,screen and (max-width: 50rem){.buanwU{width:100%;}}/*!sc*/
+data-styled.g134[id="sc-fkYqBV"]{content:"buanwU,"}/*!sc*/
+.iZqpqg{background:#263238;position:absolute;top:0;bottom:0;right:0;width:calc((100% - 260px) * 0.4);}/*!sc*/
+@media print,screen and (max-width: 75rem){.iZqpqg{display:none;}}/*!sc*/
+data-styled.g135[id="sc-evkzZa"]{content:"iZqpqg,"}/*!sc*/
+.gzMPIt{padding:5px 0;}/*!sc*/
+data-styled.g136[id="sc-iRcyzz"]{content:"gzMPIt,"}/*!sc*/
+.iOkeQy{width:calc(100% - 40px);box-sizing:border-box;margin:0 20px;padding:5px 10px 5px 20px;border:0;border-bottom:1px solid #e1e1e1;font-family:Roboto,sans-serif;font-weight:bold;font-size:13px;color:#333333;background-color:transparent;outline:none;}/*!sc*/
+data-styled.g137[id="sc-lhsSio"]{content:"iOkeQy,"}/*!sc*/
+.SikXG{position:absolute;left:20px;height:1.8em;width:0.9em;}/*!sc*/
+.SikXG path{fill:#333333;}/*!sc*/
+data-styled.g138[id="sc-enPhjR"]{content:"SikXG,"}/*!sc*/
+</style>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+</head>
+
+<body>
+  
+      <div id="redoc"><div class="sc-Pgsbw eHdqcJ redoc-wrap"><div class="sc-fstJre dsiHUZ menu-content" style="top:0px;height:calc(100vh - 0px)"><div role="search" class="sc-iRcyzz gzMPIt"><svg class="sc-enPhjR SikXG search-icon" version="1.1" viewBox="0 0 1000 1000" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><path d="M968.2,849.4L667.3,549c83.9-136.5,66.7-317.4-51.7-435.6C477.1-25,252.5-25,113.9,113.4c-138.5,138.3-138.5,362.6,0,501C219.2,730.1,413.2,743,547.6,666.5l301.9,301.4c43.6,43.6,76.9,14.9,104.2-12.4C981,928.3,1011.8,893,968.2,849.4z M524.5,522c-88.9,88.7-233,88.7-321.8,0c-88.9-88.7-88.9-232.6,0-321.3c88.9-88.7,233-88.7,321.8,0C613.4,289.4,613.4,433.3,524.5,522z"></path></svg><input placeholder="Search..." aria-label="Search" type="text" class="sc-lhsSio iOkeQy search-input" value=""/></div><div class="sc-eknHtZ ghzOpX scrollbar-container undefined"><ul role="menu" class="sc-zOxLx gAPKXX"><li tabindex="0" depth="1" data-item-id="tag/개요" role="menuitem" aria-label="개요" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz lgPGwq -depth1"><span width="calc(100% - 38px)" title="개요" class="sc-gWaSiO cxcra">개요</span></label></li><li tabindex="0" depth="1" data-item-id="tag/가이드" role="menuitem" aria-label="가이드" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz lgPGwq -depth1"><span width="calc(100% - 38px)" title="가이드" class="sc-gWaSiO cxcra">가이드</span><svg class="sc-dntSTA dUlzCe" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-zOxLx dQnkdy"><li tabindex="0" depth="2" data-item-id="tag/가이드/1." role="menuitem" aria-label="1. 연동 준비" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz fTDmgC -depth2"><span width="calc(100% - 38px)" title="1. 연동 준비" class="sc-gWaSiO cxcra">1. 연동 준비</span><svg class="sc-dntSTA dUlzCe" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-zOxLx dQnkdy"><li tabindex="0" depth="3" data-item-id="tag/가이드/1./API" role="menuitem" aria-label="API 키 생성" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz fTDmgC -depth3"><span width="calc(100% - 38px)" title="API 키 생성" class="sc-gWaSiO cxcra">API 키 생성</span></label></li><li tabindex="0" depth="3" data-item-id="tag/가이드/1./API" role="menuitem" aria-label="API 키 종류" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz fTDmgC -depth3"><span width="calc(100% - 38px)" title="API 키 종류" class="sc-gWaSiO cxcra">API 키 종류</span></label></li></ul></li><li tabindex="0" depth="2" data-item-id="tag/가이드/2." role="menuitem" aria-label="2. 연동" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz fTDmgC -depth2"><span width="calc(100% - 38px)" title="2. 연동" class="sc-gWaSiO cxcra">2. 연동</span></label></li></ul></li><li tabindex="0" depth="1" data-item-id="tag/비즈니스-에러-코드" role="menuitem" aria-label="비즈니스 에러 코드" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz lgPGwq -depth1"><span width="calc(100% - 38px)" title="비즈니스 에러 코드" class="sc-gWaSiO cxcra">비즈니스 에러 코드</span><svg class="sc-dntSTA dUlzCe" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-zOxLx dQnkdy"><li tabindex="0" depth="2" data-item-id="tag/비즈니스-에러-코드/일반" role="menuitem" aria-label="일반" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz fTDmgC -depth2"><span width="calc(100% - 38px)" title="일반" class="sc-gWaSiO cxcra">일반</span></label></li><li tabindex="0" depth="2" data-item-id="tag/비즈니스-에러-코드/인증-관련" role="menuitem" aria-label="인증 관련" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz fTDmgC -depth2"><span width="calc(100% - 38px)" title="인증 관련" class="sc-gWaSiO cxcra">인증 관련</span></label></li><li tabindex="0" depth="2" data-item-id="tag/비즈니스-에러-코드/결제-관련" role="menuitem" aria-label="결제 관련" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz fTDmgC -depth2"><span width="calc(100% - 38px)" title="결제 관련" class="sc-gWaSiO cxcra">결제 관련</span></label></li><li tabindex="0" depth="2" data-item-id="tag/비즈니스-에러-코드/거래내역-관련" role="menuitem" aria-label="거래내역 관련" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz fTDmgC -depth2"><span width="calc(100% - 38px)" title="거래내역 관련" class="sc-gWaSiO cxcra">거래내역 관련</span></label></li></ul></li><li tabindex="0" depth="2" data-item-id="operation/createLoginVerificationCode" role="menuitem" aria-label="로그인 인증번호 발송" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz iHRgeo -depth2"><span type="post" class="sc-jxYSNo NmQLu operation-type post">post</span><span tabindex="0" width="calc(100% - 38px)" class="sc-gWaSiO cxcra">로그인 인증번호 발송</span></label></li><li tabindex="0" depth="2" data-item-id="operation/login" role="menuitem" aria-label="로그인" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz iHRgeo -depth2"><span type="post" class="sc-jxYSNo NmQLu operation-type post">post</span><span tabindex="0" width="calc(100% - 38px)" class="sc-gWaSiO cxcra">로그인</span></label></li><li tabindex="0" depth="2" data-item-id="operation/createToken" role="menuitem" aria-label="API 키 발급" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz iHRgeo -depth2"><span type="post" class="sc-jxYSNo NmQLu operation-type post">post</span><span tabindex="0" width="calc(100% - 38px)" class="sc-gWaSiO cxcra">API 키 발급</span></label></li><li tabindex="0" depth="2" data-item-id="operation/cardManualPay" role="menuitem" aria-label="결제" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz iHRgeo -depth2"><span type="post" class="sc-jxYSNo NmQLu operation-type post">post</span><span tabindex="0" width="calc(100% - 38px)" class="sc-gWaSiO cxcra">결제</span></label></li><li tabindex="0" depth="2" data-item-id="operation/cardRefund" role="menuitem" aria-label="환불" aria-expanded="false" class="sc-cgHfjM ixknQI"><label class="sc-fpikKz iHRgeo -depth2"><span type="post" class="sc-jxYSNo NmQLu operation-type post">post</span><span tabindex="0" width="calc(100% - 38px)" class="sc-gWaSiO cxcra">환불</span></label></li></ul><div class="sc-kSaXSp QuyG"><a target="_blank" rel="noopener noreferrer" href="https://redocly.com/redoc/">API docs by Redocly</a></div></div></div><div class="sc-jOlHRD bovaLG"><div class="sc-cZnrqW crXcHD"><svg class="" style="transform:translate(2px, -4px) rotate(180deg);transition:transform 0.2s ease" viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15"><g transform="translate(904.92214,-879.1482)"><path d="
+          m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,
+          -55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,
+          0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,
+          -174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,
+          -174.68583 0.6895,0 26.281,25.03215 56.8701,
+          55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864
+          -231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,
+          -104.0616 -231.873,-231.248 z
+        " fill="currentColor"></path></g></svg><svg class="" style="transform:translate(2px, 4px);transition:transform 0.2s ease" viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15"><g transform="translate(904.92214,-879.1482)"><path d="
+          m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,
+          -55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,
+          0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,
+          -174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,
+          -174.68583 0.6895,0 26.281,25.03215 56.8701,
+          55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864
+          -231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,
+          -104.0616 -231.873,-231.248 z
+        " fill="currentColor"></path></g></svg></div></div><div class="sc-fkYqBV buanwU api-content"><div class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU api-info"><h1 class="sc-hwkwBN sc-jCWzJg wYHiz hPcPCj">Dekina API<!-- --> <span>(<!-- -->1.0.0<!-- -->)</span></h1><p>Download OpenAPI specification<!-- -->:</p><div class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><div class="sc-erPUmh eAqtbt"><div class="sc-iRTMaw beOrEi"> <!-- --> <span class="sc-jVxTAy hijBKj">License:<!-- --> <a href="https://www.dekina.com">dekina</a></span> </div></div></div><div data-role="redoc-summary" html="" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"></div><div data-role="redoc-description" html="&lt;p&gt;공개 API 문서&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>공개 API 문서</p>
+</div></div></div></div><div id="tag/개요" data-section-id="tag/개요" class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#tag/개요" aria-label="tag/개요"></a>개요</h2></div></div><div class="sc-ggWZvA dCzIPc"><div class="sc-eVqvcJ sc-fszimp kIppRw kbZred redoc-markdown " html="&lt;p&gt;이 결제 API는 가맹점이 안전하게 결제를 처리할 수 있도록 결제 생성, 조회, 취소 기능을 제공합니다.  &lt;/p&gt;
+&lt;p&gt;API를 통해 인증 및 결제 관련 작업을 수행할 수 있으며, 결제를 통한 거래 내역 조회, 출금 신청, 정산 확인 등은 가맹점 페이지에서 상세히 확인할 수 있습니다.  &lt;/p&gt;
+&lt;p&gt;본 문서는 가맹점 개발자를 대상으로 작성되었으며, API 연동을 위한 가이드와 사용 예시를 제공합니다.&lt;/p&gt;
+"><p>이 결제 API는 가맹점이 안전하게 결제를 처리할 수 있도록 결제 생성, 조회, 취소 기능을 제공합니다.  </p>
+<p>API를 통해 인증 및 결제 관련 작업을 수행할 수 있으며, 결제를 통한 거래 내역 조회, 출금 신청, 정산 확인 등은 가맹점 페이지에서 상세히 확인할 수 있습니다.  </p>
+<p>본 문서는 가맹점 개발자를 대상으로 작성되었으며, API 연동을 위한 가이드와 사용 예시를 제공합니다.</p>
+</div></div></div><div id="tag/가이드" data-section-id="tag/가이드" class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#tag/가이드" aria-label="tag/가이드"></a>가이드</h2></div></div></div><div id="tag/가이드/1." data-section-id="tag/가이드/1." class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#tag/가이드/1." aria-label="tag/가이드/1."></a>1. 연동 준비</h2></div></div></div><div id="tag/가이드/1./API" data-section-id="tag/가이드/1./API" class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-dYwGCk cXqSZD"><a class="sc-kcLKEh fRdsOi" href="#tag/가이드/1./API" aria-label="tag/가이드/1./API"></a>API 키 생성</h2></div></div><div class="sc-ggWZvA dCzIPc"><div class="sc-eVqvcJ sc-fszimp kIppRw kbZred redoc-markdown " html="&lt;p&gt;데키나 결제 API를 사용하려면 먼저 API 키를 발급받아야 합니다. &lt;/p&gt;
+&lt;p&gt;발급된 API 키는 클라이언트(가맹점)의 요청을 인증하고 권한을 확인하는 용도로 사용되며, 이를 통해 결제 관련 작업을 수행할 수 있습니다.&lt;/p&gt;
+"><p>데키나 결제 API를 사용하려면 먼저 API 키를 발급받아야 합니다. </p>
+<p>발급된 API 키는 클라이언트(가맹점)의 요청을 인증하고 권한을 확인하는 용도로 사용되며, 이를 통해 결제 관련 작업을 수행할 수 있습니다.</p>
+</div></div></div><div id="tag/가이드/1./API" data-section-id="tag/가이드/1./API" class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-dYwGCk cXqSZD"><a class="sc-kcLKEh fRdsOi" href="#tag/가이드/1./API" aria-label="tag/가이드/1./API"></a>API 키 종류</h2></div></div><div class="sc-ggWZvA dCzIPc"><div class="sc-eVqvcJ sc-fszimp kIppRw kbZred redoc-markdown " html="&lt;p&gt;결제 API에는 두 가지 키가 존재합니다:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;키 종류&lt;/th&gt;
+&lt;th&gt;용도&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;client&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;일반적인 서비스 이용 시 사용자 인증 및 권한 확인에 사용&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;secret&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;결제, 결제 취소(환불) 등 민감한 작업 시 사용. &lt;strong&gt;외부 노출 금지&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;⚠ 주의:&lt;/strong&gt; &lt;code&gt;secret&lt;/code&gt; 키는 절대 클라이언트에 노출되지 않도록 서버에서 안전하게 관리해야 합니다.&lt;/p&gt;
+"><p>결제 API에는 두 가지 키가 존재합니다:</p>
+<table>
+<thead>
+<tr>
+<th>키 종류</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>client</code></td>
+<td>일반적인 서비스 이용 시 사용자 인증 및 권한 확인에 사용</td>
+</tr>
+<tr>
+<td><code>secret</code></td>
+<td>결제, 결제 취소(환불) 등 민감한 작업 시 사용. <strong>외부 노출 금지</strong></td>
+</tr>
+</tbody></table>
+<p><strong>⚠ 주의:</strong> <code>secret</code> 키는 절대 클라이언트에 노출되지 않도록 서버에서 안전하게 관리해야 합니다.</p>
+</div></div></div><div id="tag/가이드/2." data-section-id="tag/가이드/2." class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#tag/가이드/2." aria-label="tag/가이드/2."></a>2. 연동</h2></div></div><div class="sc-ggWZvA dCzIPc"><div class="sc-eVqvcJ sc-fszimp kIppRw kbZred redoc-markdown " html="&lt;p&gt;결제·결제 취소(환불) API를 호출할 때에는 발급받은 API 키(&lt;code&gt;client&lt;/code&gt;, &lt;code&gt;secret&lt;/code&gt;)를 포함하여 요청합니다.&lt;br&gt;각 API의 상세 사용 방법은 &lt;strong&gt;결제·결제 취소(환불) API 문서&lt;/strong&gt;를 참고하세요.&lt;/p&gt;
+"><p>결제·결제 취소(환불) API를 호출할 때에는 발급받은 API 키(<code>client</code>, <code>secret</code>)를 포함하여 요청합니다.<br>각 API의 상세 사용 방법은 <strong>결제·결제 취소(환불) API 문서</strong>를 참고하세요.</p>
+</div></div></div><div id="tag/비즈니스-에러-코드" data-section-id="tag/비즈니스-에러-코드" class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#tag/비즈니스-에러-코드" aria-label="tag/비즈니스-에러-코드"></a>비즈니스 에러 코드</h2></div></div></div><div id="tag/비즈니스-에러-코드/일반" data-section-id="tag/비즈니스-에러-코드/일반" class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#tag/비즈니스-에러-코드/일반" aria-label="tag/비즈니스-에러-코드/일반"></a>일반</h2></div></div><div class="sc-ggWZvA dCzIPc"><div class="sc-eVqvcJ sc-fszimp kIppRw kbZred redoc-markdown " html="&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;코드&lt;/th&gt;
+&lt;th&gt;원인&lt;/th&gt;
+&lt;th&gt;해결방법&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;td&gt;유효성 검증 실패&lt;/td&gt;
+&lt;td&gt;올바른 필드 값 입력&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;401&lt;/td&gt;
+&lt;td&gt;인증 실패&lt;/td&gt;
+&lt;td&gt;API 별 필요한 인증 방식 확인 후 재요청&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;403&lt;/td&gt;
+&lt;td&gt;인가되지 않은 권한&lt;/td&gt;
+&lt;td&gt;자원에 대한 접근 권한이 없는 상태 (예: 타 가맹점 거래내역 건 환불시도)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;404&lt;/td&gt;
+&lt;td&gt;파일(자원) 찾기 실패&lt;/td&gt;
+&lt;td&gt;유효한 값 입력 후 재요청&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;500&lt;/td&gt;
+&lt;td&gt;서버 오류&lt;/td&gt;
+&lt;td&gt;당사 서버에서 발생한 오류로 &lt;a href=&quot;mailto:&amp;#99;&amp;#x6f;&amp;#x6e;&amp;#x74;&amp;#x61;&amp;#x63;&amp;#x74;&amp;#x40;&amp;#x64;&amp;#101;&amp;#107;&amp;#x69;&amp;#x6e;&amp;#97;&amp;#46;&amp;#x63;&amp;#111;&amp;#109;&quot;&gt;&amp;#99;&amp;#x6f;&amp;#x6e;&amp;#x74;&amp;#x61;&amp;#x63;&amp;#x74;&amp;#x40;&amp;#x64;&amp;#101;&amp;#107;&amp;#x69;&amp;#x6e;&amp;#97;&amp;#46;&amp;#x63;&amp;#111;&amp;#109;&lt;/a&gt; 으로 관리자 문의&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+"><table>
+<thead>
+<tr>
+<th>코드</th>
+<th>원인</th>
+<th>해결방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>400</td>
+<td>유효성 검증 실패</td>
+<td>올바른 필드 값 입력</td>
+</tr>
+<tr>
+<td>401</td>
+<td>인증 실패</td>
+<td>API 별 필요한 인증 방식 확인 후 재요청</td>
+</tr>
+<tr>
+<td>403</td>
+<td>인가되지 않은 권한</td>
+<td>자원에 대한 접근 권한이 없는 상태 (예: 타 가맹점 거래내역 건 환불시도)</td>
+</tr>
+<tr>
+<td>404</td>
+<td>파일(자원) 찾기 실패</td>
+<td>유효한 값 입력 후 재요청</td>
+</tr>
+<tr>
+<td>500</td>
+<td>서버 오류</td>
+<td>당사 서버에서 발생한 오류로 <a href="mailto:&#99;&#x6f;&#x6e;&#x74;&#x61;&#x63;&#x74;&#x40;&#x64;&#101;&#107;&#x69;&#x6e;&#97;&#46;&#x63;&#111;&#109;">&#99;&#x6f;&#x6e;&#x74;&#x61;&#x63;&#x74;&#x40;&#x64;&#101;&#107;&#x69;&#x6e;&#97;&#46;&#x63;&#111;&#109;</a> 으로 관리자 문의</td>
+</tr>
+</tbody></table>
+</div></div></div><div id="tag/비즈니스-에러-코드/인증-관련" data-section-id="tag/비즈니스-에러-코드/인증-관련" class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#tag/비즈니스-에러-코드/인증-관련" aria-label="tag/비즈니스-에러-코드/인증-관련"></a>인증 관련</h2></div></div><div class="sc-ggWZvA dCzIPc"><div class="sc-eVqvcJ sc-fszimp kIppRw kbZred redoc-markdown " html="&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;코드&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;th&gt;해결방법&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;1001&lt;/td&gt;
+&lt;td&gt;전화번호 &lt;code&gt;+&lt;/code&gt; 접두사 누락&lt;/td&gt;
+&lt;td&gt;전화번호 값 입력 시 &lt;code&gt;+&lt;/code&gt; 접두사 포함 후 재요청 (예: +821000000000)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1002&lt;/td&gt;
+&lt;td&gt;기준 횟수(10회) 이상의 인증번호 요청&lt;/td&gt;
+&lt;td&gt;10분 뒤 재요청&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1003&lt;/td&gt;
+&lt;td&gt;기준 시간 (30초) 미만 간격의 인증번호 요청&lt;/td&gt;
+&lt;td&gt;30초 간격으로 인증번호 발송 가능&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1004&lt;/td&gt;
+&lt;td&gt;인증번호 발송 실패&lt;/td&gt;
+&lt;td&gt;전화번호 입력 값 확인 후 재요청, 지속적인 문제 발생 시 &lt;a href=&quot;mailto:&amp;#99;&amp;#x6f;&amp;#x6e;&amp;#x74;&amp;#x61;&amp;#x63;&amp;#116;&amp;#64;&amp;#100;&amp;#101;&amp;#x6b;&amp;#105;&amp;#x6e;&amp;#x61;&amp;#x2e;&amp;#99;&amp;#111;&amp;#109;&quot;&gt;&amp;#99;&amp;#x6f;&amp;#x6e;&amp;#x74;&amp;#x61;&amp;#x63;&amp;#116;&amp;#64;&amp;#100;&amp;#101;&amp;#x6b;&amp;#105;&amp;#x6e;&amp;#x61;&amp;#x2e;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt; 으로 관리자 문의&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1006&lt;/td&gt;
+&lt;td&gt;유효하지 않은 인증번호&lt;/td&gt;
+&lt;td&gt;올바른 인증번호 입력 값 확인 후 재요청&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1008&lt;/td&gt;
+&lt;td&gt;로그인 실패&lt;/td&gt;
+&lt;td&gt;올바른 아이디 혹은 비밀번호 입력 후 재요청&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1009&lt;/td&gt;
+&lt;td&gt;유효하지 않은 API 키&lt;/td&gt;
+&lt;td&gt;올바른 API 키 값 입력 후 재요청&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+"><table>
+<thead>
+<tr>
+<th>코드</th>
+<th>설명</th>
+<th>해결방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1001</td>
+<td>전화번호 <code>+</code> 접두사 누락</td>
+<td>전화번호 값 입력 시 <code>+</code> 접두사 포함 후 재요청 (예: +821000000000)</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>기준 횟수(10회) 이상의 인증번호 요청</td>
+<td>10분 뒤 재요청</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>기준 시간 (30초) 미만 간격의 인증번호 요청</td>
+<td>30초 간격으로 인증번호 발송 가능</td>
+</tr>
+<tr>
+<td>1004</td>
+<td>인증번호 발송 실패</td>
+<td>전화번호 입력 값 확인 후 재요청, 지속적인 문제 발생 시 <a href="mailto:&#99;&#x6f;&#x6e;&#x74;&#x61;&#x63;&#116;&#64;&#100;&#101;&#x6b;&#105;&#x6e;&#x61;&#x2e;&#99;&#111;&#109;">&#99;&#x6f;&#x6e;&#x74;&#x61;&#x63;&#116;&#64;&#100;&#101;&#x6b;&#105;&#x6e;&#x61;&#x2e;&#99;&#111;&#109;</a> 으로 관리자 문의</td>
+</tr>
+<tr>
+<td>1006</td>
+<td>유효하지 않은 인증번호</td>
+<td>올바른 인증번호 입력 값 확인 후 재요청</td>
+</tr>
+<tr>
+<td>1008</td>
+<td>로그인 실패</td>
+<td>올바른 아이디 혹은 비밀번호 입력 후 재요청</td>
+</tr>
+<tr>
+<td>1009</td>
+<td>유효하지 않은 API 키</td>
+<td>올바른 API 키 값 입력 후 재요청</td>
+</tr>
+</tbody></table>
+</div></div></div><div id="tag/비즈니스-에러-코드/결제-관련" data-section-id="tag/비즈니스-에러-코드/결제-관련" class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#tag/비즈니스-에러-코드/결제-관련" aria-label="tag/비즈니스-에러-코드/결제-관련"></a>결제 관련</h2></div></div><div class="sc-ggWZvA dCzIPc"><div class="sc-eVqvcJ sc-fszimp kIppRw kbZred redoc-markdown " html="&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;코드&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;th&gt;해결방법&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;2001&lt;/td&gt;
+&lt;td&gt;카드결제 실패&lt;/td&gt;
+&lt;td&gt;오류 메세지 확인 후 해당하는 안내 문구에 따라 조치 후 재요청&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2002&lt;/td&gt;
+&lt;td&gt;결제관련 서버 내부 오류&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;mailto:&amp;#x63;&amp;#111;&amp;#110;&amp;#116;&amp;#x61;&amp;#99;&amp;#x74;&amp;#x40;&amp;#100;&amp;#101;&amp;#107;&amp;#105;&amp;#110;&amp;#x61;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&quot;&gt;&amp;#x63;&amp;#111;&amp;#110;&amp;#116;&amp;#x61;&amp;#99;&amp;#x74;&amp;#x40;&amp;#100;&amp;#101;&amp;#107;&amp;#105;&amp;#110;&amp;#x61;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&lt;/a&gt; 으로 관리자 문의&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2003&lt;/td&gt;
+&lt;td&gt;유효하지 않은 카드 정보&lt;/td&gt;
+&lt;td&gt;카드결제 요청 시 카드정보 혹은 카드정보 고유 식별 아이디 입력 후 재요창&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+"><table>
+<thead>
+<tr>
+<th>코드</th>
+<th>설명</th>
+<th>해결방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2001</td>
+<td>카드결제 실패</td>
+<td>오류 메세지 확인 후 해당하는 안내 문구에 따라 조치 후 재요청</td>
+</tr>
+<tr>
+<td>2002</td>
+<td>결제관련 서버 내부 오류</td>
+<td><a href="mailto:&#x63;&#111;&#110;&#116;&#x61;&#99;&#x74;&#x40;&#100;&#101;&#107;&#105;&#110;&#x61;&#46;&#x63;&#x6f;&#x6d;">&#x63;&#111;&#110;&#116;&#x61;&#99;&#x74;&#x40;&#100;&#101;&#107;&#105;&#110;&#x61;&#46;&#x63;&#x6f;&#x6d;</a> 으로 관리자 문의</td>
+</tr>
+<tr>
+<td>2003</td>
+<td>유효하지 않은 카드 정보</td>
+<td>카드결제 요청 시 카드정보 혹은 카드정보 고유 식별 아이디 입력 후 재요창</td>
+</tr>
+</tbody></table>
+</div></div></div><div id="tag/비즈니스-에러-코드/거래내역-관련" data-section-id="tag/비즈니스-에러-코드/거래내역-관련" class="sc-dTvVRJ bPmFpz"><div class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#tag/비즈니스-에러-코드/거래내역-관련" aria-label="tag/비즈니스-에러-코드/거래내역-관련"></a>거래내역 관련</h2></div></div><div class="sc-ggWZvA dCzIPc"><div class="sc-eVqvcJ sc-fszimp kIppRw kbZred redoc-markdown " html="&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;코드&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;th&gt;해결방법&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;3001&lt;/td&gt;
+&lt;td&gt;거래내역의 결제정보 조회 실패&lt;/td&gt;
+&lt;td&gt;서버 측에서 발생한 확률이 높은 오류로, &lt;a href=&quot;mailto:&amp;#x63;&amp;#111;&amp;#x6e;&amp;#116;&amp;#97;&amp;#99;&amp;#116;&amp;#64;&amp;#x64;&amp;#x65;&amp;#x6b;&amp;#105;&amp;#x6e;&amp;#97;&amp;#x2e;&amp;#x63;&amp;#111;&amp;#109;&quot;&gt;&amp;#x63;&amp;#111;&amp;#x6e;&amp;#116;&amp;#97;&amp;#99;&amp;#116;&amp;#64;&amp;#x64;&amp;#x65;&amp;#x6b;&amp;#105;&amp;#x6e;&amp;#97;&amp;#x2e;&amp;#x63;&amp;#111;&amp;#109;&lt;/a&gt; 으로 관리자 문의&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3002&lt;/td&gt;
+&lt;td&gt;거래내역 조회 실패&lt;/td&gt;
+&lt;td&gt;서버 측에서 발생한 확률이 높은 오류로, &lt;a href=&quot;mailto:&amp;#99;&amp;#111;&amp;#110;&amp;#116;&amp;#x61;&amp;#99;&amp;#x74;&amp;#64;&amp;#x64;&amp;#101;&amp;#107;&amp;#x69;&amp;#110;&amp;#x61;&amp;#x2e;&amp;#99;&amp;#x6f;&amp;#x6d;&quot;&gt;&amp;#99;&amp;#111;&amp;#110;&amp;#116;&amp;#x61;&amp;#99;&amp;#x74;&amp;#64;&amp;#x64;&amp;#101;&amp;#107;&amp;#x69;&amp;#110;&amp;#x61;&amp;#x2e;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt; 으로 관리자 문의&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3003&lt;/td&gt;
+&lt;td&gt;환불 불가&lt;/td&gt;
+&lt;td&gt;오류 메세지 확인 후 해당하는 안내 문구에 따라 조치 후 재요청&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+"><table>
+<thead>
+<tr>
+<th>코드</th>
+<th>설명</th>
+<th>해결방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3001</td>
+<td>거래내역의 결제정보 조회 실패</td>
+<td>서버 측에서 발생한 확률이 높은 오류로, <a href="mailto:&#x63;&#111;&#x6e;&#116;&#97;&#99;&#116;&#64;&#x64;&#x65;&#x6b;&#105;&#x6e;&#97;&#x2e;&#x63;&#111;&#109;">&#x63;&#111;&#x6e;&#116;&#97;&#99;&#116;&#64;&#x64;&#x65;&#x6b;&#105;&#x6e;&#97;&#x2e;&#x63;&#111;&#109;</a> 으로 관리자 문의</td>
+</tr>
+<tr>
+<td>3002</td>
+<td>거래내역 조회 실패</td>
+<td>서버 측에서 발생한 확률이 높은 오류로, <a href="mailto:&#99;&#111;&#110;&#116;&#x61;&#99;&#x74;&#64;&#x64;&#101;&#107;&#x69;&#110;&#x61;&#x2e;&#99;&#x6f;&#x6d;">&#99;&#111;&#110;&#116;&#x61;&#99;&#x74;&#64;&#x64;&#101;&#107;&#x69;&#110;&#x61;&#x2e;&#99;&#x6f;&#x6d;</a> 으로 관리자 문의</td>
+</tr>
+<tr>
+<td>3003</td>
+<td>환불 불가</td>
+<td>오류 메세지 확인 후 해당하는 안내 문구에 따라 조치 후 재요청</td>
+</tr>
+</tbody></table>
+<hr>
+</div></div></div><div id="operation/createLoginVerificationCode" data-section-id="operation/createLoginVerificationCode" class="sc-dTvVRJ gHrCVQ"><div data-section-id="operation/createLoginVerificationCode" id="operation/createLoginVerificationCode" class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#operation/createLoginVerificationCode" aria-label="operation/createLoginVerificationCode"></a>로그인 인증번호 발송<!-- --> </h2><div class="sc-bfjeOH txIPi"><div html="&lt;p&gt;사용자가 로그인 시 아이디와 비밀번호를 검증하고, 등록된 휴대폰 번호로 인증번호를 발송하는 API 입니다.&lt;/p&gt;
+&lt;p&gt;해당 인증번호는 로그인 검증용으로 사용되며, 10분간 유효합니다.&lt;/p&gt;
+&lt;p&gt;이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;400&lt;/code&gt; : 유효성 검증 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;404&lt;/code&gt; : 파일(자원) 찾기 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1002&lt;/code&gt; : 기준 횟수(10회) 이상의 인증번호 요청&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1003&lt;/code&gt; : 기준 시간 (30초) 미만 간격의 인증번호 요청&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1004&lt;/code&gt; : 인증번호 발송 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1008&lt;/code&gt; : 로그인 실패&lt;/li&gt;
+&lt;/ul&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>사용자가 로그인 시 아이디와 비밀번호를 검증하고, 등록된 휴대폰 번호로 인증번호를 발송하는 API 입니다.</p>
+<p>해당 인증번호는 로그인 검증용으로 사용되며, 10분간 유효합니다.</p>
+<p>이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)</p>
+<ul>
+<li><code>400</code> : 유효성 검증 실패</li>
+<li><code>404</code> : 파일(자원) 찾기 실패</li>
+<li><code>1002</code> : 기준 횟수(10회) 이상의 인증번호 요청</li>
+<li><code>1003</code> : 기준 시간 (30초) 미만 간격의 인증번호 요청</li>
+<li><code>1004</code> : 인증번호 발송 실패</li>
+<li><code>1008</code> : 로그인 실패</li>
+</ul>
+</div></div><h5 class="sc-eqYatC czjApA">Request Body schema: <span class="sc-dNFkOE cFlAeY">application/json</span></h5><div html="&lt;p&gt;로그인 인증번호 발송 요청 본문&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>로그인 인증번호 발송 요청 본문</p>
+</div><table class="sc-eqNDNG icJLQx"><tbody><tr class=""><td kind="field" title="id" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">id</span><div class="sc-bEjUoa sc-iIvHqT lhyyLL crXmiY">required</div></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;사용자 아이디&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>사용자 아이디</p>
+</div></div></div></td></tr><tr class="last "><td kind="field" title="pw" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">pw</span><div class="sc-bEjUoa sc-iIvHqT lhyyLL crXmiY">required</div></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;사용자 비밀번호&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>사용자 비밀번호</p>
+</div></div></div></td></tr></tbody></table><div><h3 class="sc-gDzyrw kjrVcG">Responses</h3><div><button class="sc-jIDBmd lkmdtA"><svg class="sc-dntSTA cGxVlA" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-eJvlPh fBhAXU">200<!-- --> </strong><div html="&lt;p&gt;요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;msg&lt;/code&gt; 필드로 구분합니다.&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp sc-etsjJW kIppRw jnwENr ljKHqG"><p>요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 <code>code</code>, <code>msg</code> 필드로 구분합니다.</p>
+</div></button></div></div></div><div class="sc-jwTyAe sc-hjsuWn bDYKKx FFPsr"><div class="sc-eZSpzM jjnszm"><button class="sc-buTqWO iPCVMX"><span type="post" class="sc-fQLpxn kwcmyC http-verb post">post</span><span class="sc-jvKoal kZcHWP">/auth/verification-codes</span><svg class="sc-dntSTA iuNpUs" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-ecJghI ga-DQLq"><div class="sc-iyBeIh icOxsG"><div html="" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"></div><div tabindex="0" role="button"><div class="sc-xKhEK okJpy"><span>https://www.dekina.com/api</span>/auth/verification-codes</div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Request samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="react-tabs__tab react-tabs__tab--selected" role="tab" id="tab«R2aaa»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2aaa»0" tabindex="0" data-rttab="true">Payload</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2aaa»0" aria-labelledby="tab«R2aaa»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"id"</span>: <span class="token string">&quot;test123&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"pw"</span>: <span class="token string">&quot;qwer123@&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Response samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab«R2eaa»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2eaa»0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2eaa»0" aria-labelledby="tab«R2eaa»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Example</span><div class="sc-cCVJLD sc-gsJsQu dbfEBv ehbHlf"><svg class="sc-pYNGo eyTvTk" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><select class="dropdown-select"><option value="ResponseBody" selected="">ResponseBody</option><option value="ErrorResponseBody">ErrorResponseBody</option></select><label>ResponseBody</label></div></div><div><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><span class="token punctuation">{ }</span></code></div></div></div></div></div></div></div></div></div></div></div></div><div id="operation/login" data-section-id="operation/login" class="sc-dTvVRJ gHrCVQ"><div data-section-id="operation/login" id="operation/login" class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#operation/login" aria-label="operation/login"></a>로그인<!-- --> </h2><div class="sc-bfjeOH txIPi"><div html="&lt;p&gt;아이디, 비밀번호, 인증번호를 검증하여 로그인을 수행하는 API 입니다.&lt;/p&gt;
+&lt;p&gt;해당 로그인 수행 후 세션이 생성됩니다.&lt;/p&gt;
+&lt;p&gt;이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;400&lt;/code&gt; : 유효성 검증 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;404&lt;/code&gt; : 파일(자원) 찾기 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1006&lt;/code&gt; : 유효하지 않은 인증번호&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1008&lt;/code&gt; : 로그인 실패&lt;/li&gt;
+&lt;/ul&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>아이디, 비밀번호, 인증번호를 검증하여 로그인을 수행하는 API 입니다.</p>
+<p>해당 로그인 수행 후 세션이 생성됩니다.</p>
+<p>이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)</p>
+<ul>
+<li><code>400</code> : 유효성 검증 실패</li>
+<li><code>404</code> : 파일(자원) 찾기 실패</li>
+<li><code>1006</code> : 유효하지 않은 인증번호</li>
+<li><code>1008</code> : 로그인 실패</li>
+</ul>
+</div></div><h5 class="sc-eqYatC czjApA">Request Body schema: <span class="sc-dNFkOE cFlAeY">application/json</span></h5><div html="&lt;p&gt;로그인 요청 본문&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>로그인 요청 본문</p>
+</div><table class="sc-eqNDNG icJLQx"><tbody><tr class=""><td kind="field" title="id" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">id</span><div class="sc-bEjUoa sc-iIvHqT lhyyLL crXmiY">required</div></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;사용자 아이디&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>사용자 아이디</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="pw" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">pw</span><div class="sc-bEjUoa sc-iIvHqT lhyyLL crXmiY">required</div></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;사용자 비밀번호&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>사용자 비밀번호</p>
+</div></div></div></td></tr><tr class="last "><td kind="field" title="code" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">code</span><div class="sc-bEjUoa sc-iIvHqT lhyyLL crXmiY">required</div></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;사용자 인증번호(verification-code(사용자 로그인 인증번호 발송) API를 통해 발송된 인증번호)&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>사용자 인증번호(verification-code(사용자 로그인 인증번호 발송) API를 통해 발송된 인증번호)</p>
+</div></div></div></td></tr></tbody></table><div><h3 class="sc-gDzyrw kjrVcG">Responses</h3><div><button class="sc-jIDBmd lkmdtA"><svg class="sc-dntSTA cGxVlA" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-eJvlPh fBhAXU">200<!-- --> </strong><div html="&lt;p&gt;요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;msg&lt;/code&gt; 필드로 구분합니다.&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp sc-etsjJW kIppRw jnwENr ljKHqG"><p>요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 <code>code</code>, <code>msg</code> 필드로 구분합니다.</p>
+</div></button></div></div></div><div class="sc-jwTyAe sc-hjsuWn bDYKKx FFPsr"><div class="sc-eZSpzM jjnszm"><button class="sc-buTqWO iPCVMX"><span type="post" class="sc-fQLpxn kwcmyC http-verb post">post</span><span class="sc-jvKoal kZcHWP">/auth/login</span><svg class="sc-dntSTA iuNpUs" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-ecJghI ga-DQLq"><div class="sc-iyBeIh icOxsG"><div html="" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"></div><div tabindex="0" role="button"><div class="sc-xKhEK okJpy"><span>https://www.dekina.com/api</span>/auth/login</div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Request samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="react-tabs__tab react-tabs__tab--selected" role="tab" id="tab«R2aaq»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2aaq»0" tabindex="0" data-rttab="true">Payload</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2aaq»0" aria-labelledby="tab«R2aaq»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"id"</span>: <span class="token string">&quot;test123&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"pw"</span>: <span class="token string">&quot;qwer123@&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"code"</span>: <span class="token string">&quot;123456&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Response samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab«R2eaq»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2eaq»0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2eaq»0" aria-labelledby="tab«R2eaq»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Example</span><div class="sc-cCVJLD sc-gsJsQu dbfEBv ehbHlf"><svg class="sc-pYNGo eyTvTk" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><select class="dropdown-select"><option value="ResponseBody" selected="">ResponseBody</option><option value="ErrorResponseBody">ErrorResponseBody</option></select><label>ResponseBody</label></div></div><div><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><span class="token punctuation">{ }</span></code></div></div></div></div></div></div></div></div></div></div></div></div><div id="operation/createToken" data-section-id="operation/createToken" class="sc-dTvVRJ gHrCVQ"><div data-section-id="operation/createToken" id="operation/createToken" class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#operation/createToken" aria-label="operation/createToken"></a>API 키 발급<!-- --> </h2><div class="sc-bfjeOH txIPi"><div html="&lt;p&gt;API 키를 발급하는 API 입니다.&lt;/p&gt;
+&lt;p&gt;세션이 생성된 상태에서 호출할 수 있는 API로 로그인 후 해당 API 호출이 가능합니다.&lt;/p&gt;
+&lt;p&gt;발급된 키 중 &amp;#39;client&amp;#39; 키는 일반적인 서비스 이용 시에 대한 사용자의 인증과 권한 확인 등에 사용됩니다.
+발급된 키 중 &amp;#39;secret&amp;#39; 키는 결제 서비스 등 민감한 서비스 이용 시에 대한 사용자의 인증과 권한 확인 등에 사용됩니다.&lt;/p&gt;
+&lt;p&gt;이 키는 외부에 노출되지 않도록 특별히 주의하여 보관해야 하며, 외부 노출 시 즉시 재발급받아야 합니다.&lt;/p&gt;
+&lt;p&gt;이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;401&lt;/code&gt; : 인증 실패&lt;/li&gt;
+&lt;/ul&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>API 키를 발급하는 API 입니다.</p>
+<p>세션이 생성된 상태에서 호출할 수 있는 API로 로그인 후 해당 API 호출이 가능합니다.</p>
+<p>발급된 키 중 &#39;client&#39; 키는 일반적인 서비스 이용 시에 대한 사용자의 인증과 권한 확인 등에 사용됩니다.
+발급된 키 중 &#39;secret&#39; 키는 결제 서비스 등 민감한 서비스 이용 시에 대한 사용자의 인증과 권한 확인 등에 사용됩니다.</p>
+<p>이 키는 외부에 노출되지 않도록 특별히 주의하여 보관해야 하며, 외부 노출 시 즉시 재발급받아야 합니다.</p>
+<p>이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)</p>
+<ul>
+<li><code>401</code> : 인증 실패</li>
+</ul>
+</div></div><h5 class="sc-eqYatC czjApA">Request Body schema: <span class="sc-dNFkOE cFlAeY">application/json</span></h5><div html="&lt;p&gt;해당 API는 서버에 저장된 클라이언트의 세션 정보 기반으로 수행되며, 요청 본문은 필요로 하지 않습니다.&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>해당 API는 서버에 저장된 클라이언트의 세션 정보 기반으로 수행되며, 요청 본문은 필요로 하지 않습니다.</p>
+</div><div><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">object</span></div> <div><div html="" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"></div></div></div></div><div><h3 class="sc-gDzyrw kjrVcG">Responses</h3><div><button class="sc-jIDBmd lkmdtA"><svg class="sc-dntSTA cGxVlA" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-eJvlPh fBhAXU">200<!-- --> </strong><div html="&lt;p&gt;요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;msg&lt;/code&gt; 필드로 구분합니다.&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp sc-etsjJW kIppRw jnwENr ljKHqG"><p>요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 <code>code</code>, <code>msg</code> 필드로 구분합니다.</p>
+</div></button></div></div></div><div class="sc-jwTyAe sc-hjsuWn bDYKKx FFPsr"><div class="sc-eZSpzM jjnszm"><button class="sc-buTqWO iPCVMX"><span type="post" class="sc-fQLpxn kwcmyC http-verb post">post</span><span class="sc-jvKoal kZcHWP">/token/issue</span><svg class="sc-dntSTA iuNpUs" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-ecJghI ga-DQLq"><div class="sc-iyBeIh icOxsG"><div html="" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"></div><div tabindex="0" role="button"><div class="sc-xKhEK okJpy"><span>https://www.dekina.com/api</span>/token/issue</div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Request samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="react-tabs__tab react-tabs__tab--selected" role="tab" id="tab«R2aba»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2aba»0" tabindex="0" data-rttab="true">Payload</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2aba»0" aria-labelledby="tab«R2aba»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><span class="token punctuation">{ }</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Response samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab«R2eba»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2eba»0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2eba»0" aria-labelledby="tab«R2eba»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Example</span><div class="sc-cCVJLD sc-gsJsQu dbfEBv ehbHlf"><svg class="sc-pYNGo eyTvTk" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><select class="dropdown-select"><option value="ResponseBody" selected="">ResponseBody</option><option value="ErrorResponseBody">ErrorResponseBody</option></select><label>ResponseBody</label></div></div><div><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"account"</span>: <span class="token string">&quot;68adc2406e2bcf248e4ece89&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"client"</span>: <span class="token string">&quot;BXTU9YhZ9vgwZNOm90gpeiJFdb10wx&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"secret"</span>: <span class="token string">&quot;izcfjjaxoyZWoUB3KVD2SafeEax8ob&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div></div></div></div></div><div id="operation/cardManualPay" data-section-id="operation/cardManualPay" class="sc-dTvVRJ gHrCVQ"><div data-section-id="operation/cardManualPay" id="operation/cardManualPay" class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#operation/cardManualPay" aria-label="operation/cardManualPay"></a>결제<!-- --> </h2><div class="sc-bfjeOH txIPi"><div html="&lt;p&gt;카드 결제를 수행하는 API 입니다.&lt;/p&gt;
+&lt;p&gt;API 키 or 세션 둘 중 하나는 필수로 유효하여야 결제가 올바르게 수행됩니다.&lt;/p&gt;
+&lt;p&gt;저장 결제는 &lt;code&gt;save&lt;/code&gt;필드의 값을 &lt;code&gt;true&lt;/code&gt;로 값을 담아 발송하면 카드 정보가 서버 측에 저장돼 추후 결제 시 &lt;code&gt;cardNumber&lt;/code&gt;, &lt;code&gt;cardValidationYear&lt;/code&gt;, &lt;code&gt;cardValidationMonth&lt;/code&gt; 필드를 사용하지 않고 &lt;code&gt;cardId(cardToken)&lt;/code&gt; 필드만을 사용해 결제가 가능합니다.&lt;/p&gt;
+&lt;p&gt;이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;400&lt;/code&gt; : 유효성 검증 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;401&lt;/code&gt; : 인증 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;500&lt;/code&gt; : 서버 오류&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1009&lt;/code&gt; : 유효하지 않은 API 키&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;2001&lt;/code&gt; : 카드결제 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;2002&lt;/code&gt; : 결제관련 서버 내부 오류&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;2003&lt;/code&gt; : 유효하지 않은 카드 정보&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;3001&lt;/code&gt; : 거래내역의 결제정보 조회 실패&lt;/li&gt;
+&lt;/ul&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>카드 결제를 수행하는 API 입니다.</p>
+<p>API 키 or 세션 둘 중 하나는 필수로 유효하여야 결제가 올바르게 수행됩니다.</p>
+<p>저장 결제는 <code>save</code>필드의 값을 <code>true</code>로 값을 담아 발송하면 카드 정보가 서버 측에 저장돼 추후 결제 시 <code>cardNumber</code>, <code>cardValidationYear</code>, <code>cardValidationMonth</code> 필드를 사용하지 않고 <code>cardId(cardToken)</code> 필드만을 사용해 결제가 가능합니다.</p>
+<p>이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)</p>
+<ul>
+<li><code>400</code> : 유효성 검증 실패</li>
+<li><code>401</code> : 인증 실패</li>
+<li><code>500</code> : 서버 오류</li>
+<li><code>1009</code> : 유효하지 않은 API 키</li>
+<li><code>2001</code> : 카드결제 실패</li>
+<li><code>2002</code> : 결제관련 서버 내부 오류</li>
+<li><code>2003</code> : 유효하지 않은 카드 정보</li>
+<li><code>3001</code> : 거래내역의 결제정보 조회 실패</li>
+</ul>
+</div></div><h5 class="sc-eqYatC czjApA">Request Body schema: <span class="sc-dNFkOE cFlAeY">application/json</span></h5><div html="&lt;p&gt;카드결제 요청 본문&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>카드결제 요청 본문</p>
+</div><table class="sc-eqNDNG icJLQx"><tbody><tr class=""><td kind="field" title="client" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">client</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;공개 API 키&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>공개 API 키</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="secret" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">secret</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;비밀 API 키&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>비밀 API 키</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="cardNumber" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">cardNumber</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;카드번호&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>카드번호</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="cardValidationMonth" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">cardValidationMonth</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;카드 유효기간 월&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>카드 유효기간 월</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="cardValidationYear" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">cardValidationYear</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;카드 유효기간 연도&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>카드 유효기간 연도</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="cardId" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">cardId</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;카드 고유 식별 ID&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>카드 고유 식별 ID</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="amount" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">amount</span><div class="sc-bEjUoa sc-iIvHqT lhyyLL crXmiY">required</div></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">number</span></div> <div><div html="&lt;p&gt;결제 금액&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>결제 금액</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="name" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">name</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;구매자 명&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>구매자 명</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="email" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">email</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;구매자 이메일&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>구매자 이메일</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="phoneNumber" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">phoneNumber</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;구매자 휴대폰 번호&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>구매자 휴대폰 번호</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="ip" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">ip</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;구매자 IP 주소&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>구매자 IP 주소</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="save" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">save</span></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">boolean</span></div> <div><div html="&lt;p&gt;카드정보 저장 여부&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>카드정보 저장 여부</p>
+</div></div></div></td></tr><tr class="last "><td kind="field" title="product" class="sc-kCuUfV sc-fbQrwq sc-itBLYH gdmNWp dFOJWJ kdPQHX"><span class="sc-hwddKA cteAyA"></span><button aria-label="expand product"><span class="property-name">product</span><svg class="sc-dntSTA dOPmTa" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">object</span></div> <div><div html="&lt;p&gt;상품 정보&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>상품 정보</p>
+</div></div></div></td></tr></tbody></table><div><h3 class="sc-gDzyrw kjrVcG">Responses</h3><div><button class="sc-jIDBmd lkmdtA"><svg class="sc-dntSTA cGxVlA" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-eJvlPh fBhAXU">200<!-- --> </strong><div html="&lt;p&gt;요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;msg&lt;/code&gt; 필드로 구분합니다.&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp sc-etsjJW kIppRw jnwENr ljKHqG"><p>요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 <code>code</code>, <code>msg</code> 필드로 구분합니다.</p>
+</div></button></div></div></div><div class="sc-jwTyAe sc-hjsuWn bDYKKx FFPsr"><div class="sc-eZSpzM jjnszm"><button class="sc-buTqWO iPCVMX"><span type="post" class="sc-fQLpxn kwcmyC http-verb post">post</span><span class="sc-jvKoal kZcHWP">/v1/pay/card/manual</span><svg class="sc-dntSTA iuNpUs" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-ecJghI ga-DQLq"><div class="sc-iyBeIh icOxsG"><div html="" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"></div><div tabindex="0" role="button"><div class="sc-xKhEK okJpy"><span>https://www.dekina.com/api</span>/v1/pay/card/manual</div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Request samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="react-tabs__tab react-tabs__tab--selected" role="tab" id="tab«R2abq»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2abq»0" tabindex="0" data-rttab="true">Payload</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2abq»0" aria-labelledby="tab«R2abq»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"client"</span>: <span class="token string">&quot;BXTU9YhZ9vgwZNOm90gpeiJFdb10wx&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"secret"</span>: <span class="token string">&quot;izcfjjaxoyZWoUB3KVD2SafeEax8ob&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"cardValidationYear"</span>: <span class="token string">&quot;30&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"cardValidationMonth"</span>: <span class="token string">&quot;04&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"amount"</span>: <span class="token number">100</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"name"</span>: <span class="token string">&quot;홍길동&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"email"</span>: <span class="token string">&quot;killdong@test.com&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"phoneNumber"</span>: <span class="token string">&quot;+821000000000\&quot;&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"ip"</span>: <span class="token string">&quot;127.0.0.1&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"save"</span>: <span class="token boolean">false</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"product"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"name"</span>: <span class="token string">&quot;사과10kg&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"type"</span>: <span class="token string">&quot;Offline&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Response samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab«R2ebq»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2ebq»0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2ebq»0" aria-labelledby="tab«R2ebq»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Example</span><div class="sc-cCVJLD sc-gsJsQu dbfEBv ehbHlf"><svg class="sc-pYNGo eyTvTk" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><select class="dropdown-select"><option value="ResponseBody" selected="">ResponseBody</option><option value="ErrorResponseBody">ErrorResponseBody</option></select><label>ResponseBody</label></div></div><div><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"id"</span>: <span class="token string">&quot;68b62d6ef3775a1369b4edc1&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"cardToken"</span>: <span class="token string">&quot;68b62d82f3775a1369b4edcf&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div></div></div></div></div><div id="operation/cardRefund" data-section-id="operation/cardRefund" class="sc-dTvVRJ gHrCVQ"><div data-section-id="operation/cardRefund" id="operation/cardRefund" class="sc-jJLAfE gkiSyE"><div class="sc-ggWZvA fqkwbU"><h2 class="sc-kNOymR iFSqkw"><a class="sc-kcLKEh fRdsOi" href="#operation/cardRefund" aria-label="operation/cardRefund"></a>환불<!-- --> </h2><div class="sc-bfjeOH txIPi"><div html="&lt;p&gt;카드결제가 수행된 특정 거래 내역에 대한 카드결제 취소를 수행하는 API 입니다.&lt;/p&gt;
+&lt;p&gt;이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;400&lt;/code&gt; : 유효성 검증 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;401&lt;/code&gt; : 인증 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;403&lt;/code&gt; : 인가되지 않은 권한&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;3001&lt;/code&gt; : 거래내역의 결제정보 조회 실패&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;3003&lt;/code&gt; : 거래내역의 결제정보 조회 실패&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;해당 API의 경우 데키나 페이지에서 계정 로그인 시 거래내역을 확인하며 환불 진행 또한 가능합니다.&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>카드결제가 수행된 특정 거래 내역에 대한 카드결제 취소를 수행하는 API 입니다.</p>
+<p>이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)</p>
+<ul>
+<li><code>400</code> : 유효성 검증 실패</li>
+<li><code>401</code> : 인증 실패</li>
+<li><code>403</code> : 인가되지 않은 권한</li>
+<li><code>3001</code> : 거래내역의 결제정보 조회 실패</li>
+<li><code>3003</code> : 거래내역의 결제정보 조회 실패</li>
+</ul>
+<p>해당 API의 경우 데키나 페이지에서 계정 로그인 시 거래내역을 확인하며 환불 진행 또한 가능합니다.</p>
+</div></div><h5 class="sc-eqYatC czjApA">Request Body schema: <span class="sc-dNFkOE cFlAeY">application/json</span></h5><div html="&lt;p&gt;카드결제 취소 요청 본문&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw kbZred"><p>카드결제 취소 요청 본문</p>
+</div><table class="sc-eqNDNG icJLQx"><tbody><tr class=""><td kind="field" title="id" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">id</span><div class="sc-bEjUoa sc-iIvHqT lhyyLL crXmiY">required</div></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;거래내역 고유 식별 아이디&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>거래내역 고유 식별 아이디</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="client" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">client</span><div class="sc-bEjUoa sc-iIvHqT lhyyLL crXmiY">required</div></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;공개 API 키&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>공개 API 키</p>
+</div></div></div></td></tr><tr class="last "><td kind="field" title="secret" class="sc-kCuUfV sc-fbQrwq gdmNWp dFOJWJ"><span class="sc-hwddKA cteAyA"></span><span class="property-name">secret</span><div class="sc-bEjUoa sc-iIvHqT lhyyLL crXmiY">required</div></td><td class="sc-gGKoUb ixGaBD"><div><div><span class="sc-bEjUoa sc-boKDdR lhyyLL jYezsP"></span><span class="sc-bEjUoa sc-fOOuSg lhyyLL dbKJYq">string</span></div> <div><div html="&lt;p&gt;비밀 API 키&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"><p>비밀 API 키</p>
+</div></div></div></td></tr></tbody></table><div><h3 class="sc-gDzyrw kjrVcG">Responses</h3><div><button class="sc-jIDBmd lkmdtA"><svg class="sc-dntSTA cGxVlA" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-eJvlPh fBhAXU">200<!-- --> </strong><div html="&lt;p&gt;요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 &lt;code&gt;code&lt;/code&gt;, &lt;code&gt;msg&lt;/code&gt; 필드로 구분합니다.&lt;/p&gt;
+" class="sc-eVqvcJ sc-fszimp sc-etsjJW kIppRw jnwENr ljKHqG"><p>요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 <code>code</code>, <code>msg</code> 필드로 구분합니다.</p>
+</div></button></div></div></div><div class="sc-jwTyAe sc-hjsuWn bDYKKx FFPsr"><div class="sc-eZSpzM jjnszm"><button class="sc-buTqWO iPCVMX"><span type="post" class="sc-fQLpxn kwcmyC http-verb post">post</span><span class="sc-jvKoal kZcHWP">/v1/pay/money/refund</span><svg class="sc-dntSTA iuNpUs" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-ecJghI ga-DQLq"><div class="sc-iyBeIh icOxsG"><div html="" class="sc-eVqvcJ sc-fszimp kIppRw drqpJr"></div><div tabindex="0" role="button"><div class="sc-xKhEK okJpy"><span>https://www.dekina.com/api</span>/v1/pay/money/refund</div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Request samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="react-tabs__tab react-tabs__tab--selected" role="tab" id="tab«R2aca»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2aca»0" tabindex="0" data-rttab="true">Payload</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2aca»0" aria-labelledby="tab«R2aca»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"id"</span>: <span class="token string">&quot;68b62e7af3775a1369b4ee09&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"client"</span>: <span class="token string">&quot;BXTU9YhZ9vgwZNOm90gpeiJFdb10wx&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"secret"</span>: <span class="token string">&quot;izcfjjaxoyZWoUB3KVD2SafeEax8ob&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-lgpSej drJHMo"> <!-- -->Response samples<!-- --> </h3><div class="sc-cOpnSz fyxuKi" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab«R2eca»0" aria-selected="true" aria-disabled="false" aria-controls="panel«R2eca»0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel«R2eca»0" aria-labelledby="tab«R2eca»0"><div><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Content type</span><div class="sc-bAehkN iNRAJK">application/json</div></div><div class="sc-blIAwI eKKwxo"><div class="sc-bSFBcf iLdyBp"><span class="sc-gahYZc cXitJ">Example</span><div class="sc-cCVJLD sc-gsJsQu dbfEBv ehbHlf"><svg class="sc-pYNGo eyTvTk" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><select class="dropdown-select"><option value="ResponseBody" selected="">ResponseBody</option><option value="ErrorResponseBody">ErrorResponseBody</option></select><label>ResponseBody</label></div></div><div><div class="sc-dClGHI fdRrNy"><div class="sc-bbbBoY bBWkcI"><button><div class="sc-fYmhhH iNCOCX">Copy</div></button></div><div tabindex="0" class="sc-eVqvcJ kIppRw sc-fhfEft dFvLDb"><div class="redoc-json"><code><span class="token punctuation">{ }</span></code></div></div></div></div></div></div></div></div></div></div></div></div></div><div class="sc-evkzZa iZqpqg"></div></div></div>
+      <script>
+      const __redoc_state = {"menu":{"activeItemIdx":-1},"spec":{"data":{"openapi":"3.0.3","info":{"title":"Dekina API","description":"공개 API 문서","version":"1.0.0","license":{"name":"dekina","url":"https://www.dekina.com"}},"servers":[{"url":"https://www.dekina.com/api"}],"tags":[{"name":"개요","description":"이 결제 API는 가맹점이 안전하게 결제를 처리할 수 있도록 결제 생성, 조회, 취소 기능을 제공합니다.  \n\nAPI를 통해 인증 및 결제 관련 작업을 수행할 수 있으며, 결제를 통한 거래 내역 조회, 출금 신청, 정산 확인 등은 가맹점 페이지에서 상세히 확인할 수 있습니다.  \n\n본 문서는 가맹점 개발자를 대상으로 작성되었으며, API 연동을 위한 가이드와 사용 예시를 제공합니다.\n"},{"name":"가이드","description":"# 1. 연동 준비\n\n## API 키 생성\n\n데키나 결제 API를 사용하려면 먼저 API 키를 발급받아야 합니다. \n\n발급된 API 키는 클라이언트(가맹점)의 요청을 인증하고 권한을 확인하는 용도로 사용되며, 이를 통해 결제 관련 작업을 수행할 수 있습니다.\n\n## API 키 종류\n\n결제 API에는 두 가지 키가 존재합니다:\n\n| 키 종류 | 용도 |\n|---------|--------------------------------------------|\n| `client` | 일반적인 서비스 이용 시 사용자 인증 및 권한 확인에 사용 |\n| `secret` | 결제, 결제 취소(환불) 등 민감한 작업 시 사용. **외부 노출 금지** |\n\n**⚠ 주의:** `secret` 키는 절대 클라이언트에 노출되지 않도록 서버에서 안전하게 관리해야 합니다.\n\n# 2. 연동\n\n결제·결제 취소(환불) API를 호출할 때에는 발급받은 API 키(`client`, `secret`)를 포함하여 요청합니다.  \n각 API의 상세 사용 방법은 **결제·결제 취소(환불) API 문서**를 참고하세요.\n"},{"name":"비즈니스 에러 코드","description":"# 일반\n| 코드  | 원인                                     | 해결방법                             |\n|-------|----------------------------------------|-------------------------------------|\n| 400  | 유효성 검증 실패 | 올바른 필드 값 입력\n| 401  | 인증 실패                         | API 별 필요한 인증 방식 확인 후 재요청               |\n| 403  | 인가되지 않은 권한           | 자원에 대한 접근 권한이 없는 상태 (예: 타 가맹점 거래내역 건 환불시도)  |\n| 404  | 파일(자원) 찾기 실패                         | 유효한 값 입력 후 재요청               |\n| 500  | 서버 오류                     | 당사 서버에서 발생한 오류로 contact@dekina.com 으로 관리자 문의         |\n\n# 인증 관련\n| 코드  | 설명                                     | 해결방법                             |\n|-------|----------------------------------------|-------------------------------------|\n| 1001  | 전화번호 `+` 접두사 누락                  | 전화번호 값 입력 시 `+` 접두사 포함 후 재요청 (예: +821000000000)      |\n| 1002  | 기준 횟수(10회) 이상의 인증번호 요청           | 10분 뒤 재요청    |\n| 1003  | 기준 시간 (30초) 미만 간격의 인증번호 요청       |  30초 간격으로 인증번호 발송 가능   |\n| 1004  | 인증번호 발송 실패                         | 전화번호 입력 값 확인 후 재요청, 지속적인 문제 발생 시 contact@dekina.com 으로 관리자 문의     |\n| 1006  | 유효하지 않은 인증번호                         | 올바른 인증번호 입력 값 확인 후 재요청     |\n| 1008  | 로그인 실패                         | 올바른 아이디 혹은 비밀번호 입력 후 재요청     |\n| 1009  | 유효하지 않은 API 키                         | 올바른 API 키 값 입력 후 재요청    |\n\n# 결제 관련\n| 코드  | 설명                                     | 해결방법                             |\n|-------|----------------------------------------|-------------------------------------|\n| 2001  | 카드결제 실패               | 오류 메세지 확인 후 해당하는 안내 문구에 따라 조치 후 재요청    |\n| 2002  | 결제관련 서버 내부 오류                           | contact@dekina.com 으로 관리자 문의 |\n| 2003  | 유효하지 않은 카드 정보                            | 카드결제 요청 시 카드정보 혹은 카드정보 고유 식별 아이디 입력 후 재요창 |\n\n# 거래내역 관련\n| 코드  | 설명                                     | 해결방법                             |\n|-------|----------------------------------------|-------------------------------------|\n| 3001  | 거래내역의 결제정보 조회 실패               | 서버 측에서 발생한 확률이 높은 오류로, contact@dekina.com 으로 관리자 문의      |\n| 3002  | 거래내역 조회 실패                           | 서버 측에서 발생한 확률이 높은 오류로, contact@dekina.com 으로 관리자 문의                   |\n| 3003  | 환불 불가                   | 오류 메세지 확인 후 해당하는 안내 문구에 따라 조치 후 재요청     |\n---\n"}],"paths":{"/auth/verification-codes":{"post":{"summary":"로그인 인증번호 발송","description":"사용자가 로그인 시 아이디와 비밀번호를 검증하고, 등록된 휴대폰 번호로 인증번호를 발송하는 API 입니다.\n\n해당 인증번호는 로그인 검증용으로 사용되며, 10분간 유효합니다.\n\n이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)\n- `400` : 유효성 검증 실패\n- `404` : 파일(자원) 찾기 실패\n- `1002` : 기준 횟수(10회) 이상의 인증번호 요청\n- `1003` : 기준 시간 (30초) 미만 간격의 인증번호 요청\n- `1004` : 인증번호 발송 실패\n- `1008` : 로그인 실패\n","operationId":"createLoginVerificationCode","security":[],"requestBody":{"$ref":"#/components/requestBodies/ReqeustBody"},"responses":{"200":{"description":"요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 `code`, `msg` 필드로 구분합니다.","content":{"application/json":{"schema":{"oneOf":[{"$ref":"#/components/schemas/ResponseBody"},{"$ref":"#/components/schemas/ErrorResponseBody"}]}}}}}}},"/auth/login":{"post":{"summary":"로그인","description":"아이디, 비밀번호, 인증번호를 검증하여 로그인을 수행하는 API 입니다.\n\n해당 로그인 수행 후 세션이 생성됩니다.\n\n이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)\n- `400` : 유효성 검증 실패\n- `404` : 파일(자원) 찾기 실패\n- `1006` : 유효하지 않은 인증번호\n- `1008` : 로그인 실패\n","operationId":"login","security":[],"requestBody":{"$ref":"#/components/requestBodies/requestBodies-ReqeustBody"},"responses":{"200":{"description":"요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 `code`, `msg` 필드로 구분합니다.","content":{"application/json":{"schema":{"oneOf":[{"$ref":"#/components/schemas/ResponseBody"},{"$ref":"#/components/schemas/ErrorResponseBody"}]}}}}}}},"/token/issue":{"post":{"summary":"API 키 발급","description":"API 키를 발급하는 API 입니다.\n\n세션이 생성된 상태에서 호출할 수 있는 API로 로그인 후 해당 API 호출이 가능합니다.\n\n발급된 키 중 'client' 키는 일반적인 서비스 이용 시에 대한 사용자의 인증과 권한 확인 등에 사용됩니다.\n발급된 키 중 'secret' 키는 결제 서비스 등 민감한 서비스 이용 시에 대한 사용자의 인증과 권한 확인 등에 사용됩니다.\n\n이 키는 외부에 노출되지 않도록 특별히 주의하여 보관해야 하며, 외부 노출 시 즉시 재발급받아야 합니다.\n\n이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)\n  - `401` : 인증 실패\n","operationId":"createToken","security":[],"requestBody":{"description":"해당 API는 서버에 저장된 클라이언트의 세션 정보 기반으로 수행되며, 요청 본문은 필요로 하지 않습니다.","content":{"application/json":{"schema":{"type":"object","properties":{}}}}},"responses":{"200":{"description":"요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 `code`, `msg` 필드로 구분합니다.","content":{"application/json":{"schema":{"oneOf":[{"$ref":"#/components/schemas/schemas-ResponseBody"},{"$ref":"#/components/schemas/ErrorResponseBody"}]}}}}}}},"/v1/pay/card/manual":{"post":{"summary":"결제","description":"카드 결제를 수행하는 API 입니다.\n\nAPI 키 or 세션 둘 중 하나는 필수로 유효하여야 결제가 올바르게 수행됩니다.\n\n저장 결제는 `save`필드의 값을 `true`로 값을 담아 발송하면 카드 정보가 서버 측에 저장돼 추후 결제 시 `cardNumber`, `cardValidationYear`, `cardValidationMonth` 필드를 사용하지 않고 `cardId(cardToken)` 필드만을 사용해 결제가 가능합니다.\n\n이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)\n- `400` : 유효성 검증 실패\n- `401` : 인증 실패\n- `500` : 서버 오류\n- `1009` : 유효하지 않은 API 키\n- `2001` : 카드결제 실패\n- `2002` : 결제관련 서버 내부 오류\n- `2003` : 유효하지 않은 카드 정보\n- `3001` : 거래내역의 결제정보 조회 실패\n","operationId":"cardManualPay","security":[],"requestBody":{"$ref":"#/components/requestBodies/components-requestBodies-ReqeustBody"},"responses":{"200":{"description":"요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 `code`, `msg` 필드로 구분합니다.","content":{"application/json":{"schema":{"oneOf":[{"$ref":"#/components/schemas/components-schemas-ResponseBody"},{"$ref":"#/components/schemas/ErrorResponseBody"}]}}}}}}},"/v1/pay/money/refund":{"post":{"summary":"환불","description":"\n카드결제가 수행된 특정 거래 내역에 대한 카드결제 취소를 수행하는 API 입니다.\n\n이 API에서 발생 가능한 에러 코드는 다음과 같습니다. (전체 에러 및 에러의 조치 방법에 대해서는 에러 코드 섹션 참조)\n  - `400` : 유효성 검증 실패\n  - `401` : 인증 실패\n  - `403` : 인가되지 않은 권한\n  - `3001` : 거래내역의 결제정보 조회 실패\n  - `3003` : 거래내역의 결제정보 조회 실패\n\n해당 API의 경우 데키나 페이지에서 계정 로그인 시 거래내역을 확인하며 환불 진행 또한 가능합니다.\n","operationId":"cardRefund","security":[],"requestBody":{"$ref":"#/components/requestBodies/card-refund_components-requestBodies-ReqeustBody"},"responses":{"200":{"description":"요청 결과는 성공·실패 여부 모두 HTTP Status 200(OK)으로 반환 되며, 실제 성공·실패 여부는 응답 본문의 `code`, `msg` 필드로 구분합니다.","content":{"application/json":{"schema":{"oneOf":[{"$ref":"#/components/schemas/ResponseBody"},{"$ref":"#/components/schemas/ErrorResponseBody"}]}}}}}}}},"components":{"requestBodies":{"ReqeustBody":{"description":"로그인 인증번호 발송 요청 본문","content":{"application/json":{"schema":{"type":"object","required":["id","pw"],"properties":{"id":{"type":"string","description":"사용자 아이디"},"pw":{"type":"string","description":"사용자 비밀번호"}},"example":{"id":"test123","pw":"qwer123@"}}}}},"requestBodies-ReqeustBody":{"description":"로그인 요청 본문","content":{"application/json":{"schema":{"type":"object","required":["id","pw","code"],"properties":{"id":{"type":"string","description":"사용자 아이디"},"pw":{"type":"string","description":"사용자 비밀번호"},"code":{"type":"string","description":"사용자 인증번호(verification-code(사용자 로그인 인증번호 발송) API를 통해 발송된 인증번호)"}},"example":{"id":"test123","pw":"qwer123@","code":"123456"}}}}},"components-requestBodies-ReqeustBody":{"description":"카드결제 요청 본문","content":{"application/json":{"schema":{"type":"object","required":["amount"],"properties":{"client":{"type":"string","description":"공개 API 키"},"secret":{"type":"string","description":"비밀 API 키"},"cardNumber":{"type":"string","description":"카드번호"},"cardValidationMonth":{"type":"string","description":"카드 유효기간 월"},"cardValidationYear":{"type":"string","description":"카드 유효기간 연도"},"cardId":{"type":"string","description":"카드 고유 식별 ID"},"amount":{"type":"number","description":"결제 금액"},"name":{"type":"string","description":"구매자 명"},"email":{"type":"string","description":"구매자 이메일"},"phoneNumber":{"type":"string","description":"구매자 휴대폰 번호"},"ip":{"type":"string","description":"구매자 IP 주소"},"save":{"type":"boolean","description":"카드정보 저장 여부"},"product":{"type":"object","description":"상품 정보","properties":{"name":{"type":"string","description":"상품 명"},"type":{"type":"string","description":"상품 구분 (Online, Offline)"}}}},"example":{"client":"BXTU9YhZ9vgwZNOm90gpeiJFdb10wx","secret":"izcfjjaxoyZWoUB3KVD2SafeEax8ob","cardValidationYear":"30","cardValidationMonth":"04","amount":100,"name":"홍길동","email":"killdong@test.com","phoneNumber":"+821000000000\"","ip":"127.0.0.1","save":false,"product":{"name":"사과10kg","type":"Offline"}}}}}},"card-refund_components-requestBodies-ReqeustBody":{"description":"카드결제 취소 요청 본문","content":{"application/json":{"schema":{"type":"object","required":["id","client","secret"],"properties":{"id":{"type":"string","description":"거래내역 고유 식별 아이디"},"client":{"type":"string","description":"공개 API 키"},"secret":{"type":"string","description":"비밀 API 키"}},"example":{"id":"68b62e7af3775a1369b4ee09","client":"BXTU9YhZ9vgwZNOm90gpeiJFdb10wx","secret":"izcfjjaxoyZWoUB3KVD2SafeEax8ob"}}}}}},"schemas":{"ResponseBody":{"type":"object","description":"성공 시 빈 객체 반환","example":{}},"ErrorResponseBody":{"type":"object","properties":{"code":{"type":"integer","description":"비즈니스 에러 코드"},"msg":{"type":"string","description":"에러 메시지"}},"example":{"code":400,"msg":"'id' 값을 입력해 주세요"}},"schemas-ResponseBody":{"title":"ResponseBody","type":"object","required":["account","client","secret"],"properties":{"account":{"type":"string","description":"사용자 계정 고유 식별 아이디"},"client":{"type":"string","description":"공개 API 키"},"string":{"type":"string","description":"비밀 API 키"}},"example":{"account":"68adc2406e2bcf248e4ece89","client":"BXTU9YhZ9vgwZNOm90gpeiJFdb10wx","secret":"izcfjjaxoyZWoUB3KVD2SafeEax8ob"}},"components-schemas-ResponseBody":{"title":"ResponseBody","type":"object","required":["id"],"properties":{"id":{"type":"string","description":"거래내역 고유 식별 아이디"},"cardToken":{"type":"string","description":"카드정보 고유 식별 아이디 (저장 결제로 요청한 경우 포함)"}},"example":{"id":"68b62d6ef3775a1369b4edc1","cardToken":"68b62d82f3775a1369b4edcf"}}}}}},"searchIndex":{"store":["tag/개요","tag/가이드","tag/가이드/1.","tag/가이드/1./API","tag/가이드/1./API","tag/가이드/2.","tag/비즈니스-에러-코드","tag/비즈니스-에러-코드/일반","tag/비즈니스-에러-코드/인증-관련","tag/비즈니스-에러-코드/결제-관련","tag/비즈니스-에러-코드/거래내역-관련","operation/createLoginVerificationCode","operation/login","operation/createToken","operation/cardManualPay","operation/cardRefund"],"index":{"version":"2.3.9","fields":["title","description"],"fieldVectors":[["title/0",[0,0.444]],["description/0",[0,0.76,1,0.252]],["title/1",[0,0.444]],["description/1",[]],["title/2",[0,0.426,2,2.015]],["description/2",[]],["title/3",[0,0.426,1,0.132]],["description/3",[0,0.754,1,0.282]],["title/4",[0,0.426,1,0.132]],["description/4",[0,0.76,1,0.162,3,1.611,4,2.202]],["title/5",[0,0.353,5,2.428]],["description/5",[0,0.746,1,0.302,3,2.128,4,2.128]],["title/6",[0,0.501]],["description/6",[]],["title/7",[0,0.444]],["description/7",[0,0.761,1,0.134,6,0.954,7,1.123,8,1.62,9,1.336,10,1.62,11,1.123]],["title/8",[0,0.486]],["description/8",[0,0.761,1,0.163,11,0.89,12,1.625,13,1.625,14,1.283,15,1.968,16,1.283,17,1.968,18,1.283,19,1.283,20,1.058,21,1.283]],["title/9",[0,0.486]],["description/9",[0,0.76,11,1.297,22,1.871,23,1.871,24,1.871]],["title/10",[0,0.486]],["description/10",[0,0.76,11,1.763,25,1.501,26,2.305,27,1.82]],["title/11",[0,0.501]],["description/11",[0,0.76,1,0.195,6,0.959,9,1.344,14,1.63,15,2.351,16,1.63,17,1.63,18,1.63,20,1.344,28,2.064]],["title/12",[0,0.444]],["description/12",[0,0.759,1,0.218,6,1.125,9,1.576,19,1.912,20,1.576,29,2.421]],["title/13",[0,0.426,1,0.132]],["description/13",[0,0.761,1,0.258,3,1.252,4,1.252,7,1.053,30,1.923]],["title/14",[0,0.444]],["description/14",[0,0.76,1,0.23,6,0.806,7,0.949,10,1.369,21,1.369,22,1.369,23,1.369,24,1.369,25,1.129,31,1.734,32,1.734,33,1.734,34,1.734,35,1.734,36,1.734,37,1.734]],["title/15",[0,0.444]],["description/15",[0,0.76,1,0.233,6,0.99,7,1.166,8,1.682,25,1.386,27,1.682,38,2.13]]],"invertedIndex":[["",{"_index":0,"title":{"0":{},"1":{},"2":{},"3":{},"4":{},"5":{},"6":{},"7":{},"8":{},"9":{},"10":{},"11":{},"12":{},"13":{},"14":{},"15":{}},"description":{"0":{},"3":{},"4":{},"5":{},"7":{},"8":{},"9":{},"10":{},"11":{},"12":{},"13":{},"14":{},"15":{}}}],["1",{"_index":2,"title":{"2":{}},"description":{}}],["10",{"_index":15,"title":{},"description":{"8":{},"11":{}}}],["1001",{"_index":12,"title":{},"description":{"8":{}}}],["1002",{"_index":14,"title":{},"description":{"8":{},"11":{}}}],["1003",{"_index":16,"title":{},"description":{"8":{},"11":{}}}],["1004",{"_index":18,"title":{},"description":{"8":{},"11":{}}}],["1006",{"_index":19,"title":{},"description":{"8":{},"12":{}}}],["1008",{"_index":20,"title":{},"description":{"8":{},"11":{},"12":{}}}],["1009",{"_index":21,"title":{},"description":{"8":{},"14":{}}}],["2",{"_index":5,"title":{"5":{}},"description":{}}],["2001",{"_index":22,"title":{},"description":{"9":{},"14":{}}}],["2002",{"_index":23,"title":{},"description":{"9":{},"14":{}}}],["2003",{"_index":24,"title":{},"description":{"9":{},"14":{}}}],["30",{"_index":17,"title":{},"description":{"8":{},"11":{}}}],["3001",{"_index":25,"title":{},"description":{"10":{},"14":{},"15":{}}}],["3002",{"_index":26,"title":{},"description":{"10":{}}}],["3003",{"_index":27,"title":{},"description":{"10":{},"15":{}}}],["400",{"_index":6,"title":{},"description":{"7":{},"11":{},"12":{},"14":{},"15":{}}}],["401",{"_index":7,"title":{},"description":{"7":{},"13":{},"14":{},"15":{}}}],["403",{"_index":8,"title":{},"description":{"7":{},"15":{}}}],["404",{"_index":9,"title":{},"description":{"7":{},"11":{},"12":{}}}],["500",{"_index":10,"title":{},"description":{"7":{},"14":{}}}],["821000000000",{"_index":13,"title":{},"description":{"8":{}}}],["api",{"_index":1,"title":{"3":{},"4":{},"13":{}},"description":{"0":{},"3":{},"4":{},"5":{},"7":{},"8":{},"11":{},"12":{},"13":{},"14":{},"15":{}}}],["auth/login",{"_index":29,"title":{},"description":{"12":{}}}],["auth/verification-cod",{"_index":28,"title":{},"description":{"11":{}}}],["cardid(cardtoken",{"_index":36,"title":{},"description":{"14":{}}}],["cardnumb",{"_index":33,"title":{},"description":{"14":{}}}],["cardvalidationmonth",{"_index":35,"title":{},"description":{"14":{}}}],["cardvalidationyear",{"_index":34,"title":{},"description":{"14":{}}}],["client",{"_index":3,"title":{},"description":{"4":{},"5":{},"13":{}}}],["contact@dekina.com",{"_index":11,"title":{},"description":{"7":{},"8":{},"9":{},"10":{}}}],["save",{"_index":31,"title":{},"description":{"14":{}}}],["secret",{"_index":4,"title":{},"description":{"4":{},"5":{},"13":{}}}],["token/issu",{"_index":30,"title":{},"description":{"13":{}}}],["true",{"_index":32,"title":{},"description":{"14":{}}}],["v1/pay/card/manu",{"_index":37,"title":{},"description":{"14":{}}}],["v1/pay/money/refund",{"_index":38,"title":{},"description":{"15":{}}}]],"pipeline":[]}},"options":{}};
+
+      var container = document.getElementById('redoc');
+      Redoc.hydrate(__redoc_state, container);
+
+      </script>
+</body>
+
+</html>
